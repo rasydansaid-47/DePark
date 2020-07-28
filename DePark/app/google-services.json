@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "509830218169",
+    "firebase_url": "https://depark-app.firebaseio.com",
+    "project_id": "depark-app",
+    "storage_bucket": "depark-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509830218169:android:339530479d6b0bf1387668",
+        "android_client_info": {
+          "package_name": "com.example.depark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509830218169-25m5vf0s3f3k8bnjieb6ufu55ui4cvkv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAXnNKGTz7pzgd6sW6Vwbob8v1vjHgHF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "509830218169-25m5vf0s3f3k8bnjieb6ufu55ui4cvkv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
