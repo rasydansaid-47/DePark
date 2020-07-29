@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
         android:text="Login"
         android:textSize="25dp"
         android:textStyle="bold" />
@@ -37,7 +38,7 @@
         android:layout_marginLeft="100dp"
         android:text="Login" />
 
-    <TextView android:id="@+id/lnkRegister"
+    <TextView android:id="@+id/txtRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -45,4 +46,13 @@
         android:gravity="center"
         android:textSize="20dp"
         android:textColor="@color/colorBackground"/>
+
+    <TextView
+        android:id="@+id/txtInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Text"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="100dp"/>
 </LinearLayout>

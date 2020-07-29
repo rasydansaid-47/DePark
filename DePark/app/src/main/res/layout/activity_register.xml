@@ -28,13 +28,7 @@
         android:layout_marginLeft="100dp"
         android:hint="Email"
         android:ems="10" />
-    <EditText
-        android:id="@+id/txtPhonenumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:hint="Phonenumber"
-        android:ems="10" />
+
     <EditText
         android:id="@+id/txtPwd"
         android:layout_width="wrap_content"
@@ -60,7 +54,7 @@
         android:text="Login" />
 
     <TextView
-        android:id="@+id/lnkLogin"
+        android:id="@+id/txtLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
