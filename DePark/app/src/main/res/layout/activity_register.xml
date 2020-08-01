@@ -47,11 +47,11 @@
         android:ems="10" />
 
     <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="213dp"
+        android:id="@+id/btnRegister"
+        android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:text="Login" />
+        android:text="Register" />
 
     <TextView
         android:id="@+id/txtLogin"
