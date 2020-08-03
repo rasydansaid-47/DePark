@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity{
                         Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    
+
                     firebaseAuth.createUserWithEmailAndPassword(s1,s2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -78,7 +78,6 @@ public class RegisterActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-
     }
 
     private void setupUIView() {

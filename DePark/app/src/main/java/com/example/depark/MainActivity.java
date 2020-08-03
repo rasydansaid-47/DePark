@@ -3,6 +3,7 @@ package com.example.depark;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
@@ -19,7 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth firebaseAuth;
@@ -46,7 +47,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView.setNavigationItemSelectedListener(this);
+        
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id){
+                    case R.id.nav_home:
+                        Toast.makeText(getApplicationContext(),"Home is selected!",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this,HomeFragment.class));
+                        break;
+
+                    case R.id.nav_profile:
+                        Toast.makeText(getApplicationContext(),"Profile is selected!",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this,ProfileFragment.class));
+                        break;
+
+                    case R.id.nav_logout:
+                        Toast.makeText(getApplicationContext(),"Logout is selected!",Toast.LENGTH_LONG).show();
+                        logout();
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -71,14 +95,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent toMain = new Intent(getApplicationContext(), LoginActivity.class);
         toMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(toMain);
-    }
-
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_logout) {
-            logout();
-        }
-        return true;
     }
 }

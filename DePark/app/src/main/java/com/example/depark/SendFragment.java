@@ -1,4 +1,4 @@
-package com.example.depark.ui.gallery;
+package com.example.depark;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,19 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.depark.R;
+public class SendFragment extends Fragment {
 
-public class GalleryFragment extends Fragment {
-
-    private GalleryViewModel galleryViewModel;
+    private SendViewModel sendViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.textView10);
-        galleryViewModel.getText().observe(this, new Observer<String>() {
+        sendViewModel =
+                ViewModelProviders.of(this).get(SendViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_send, container, false);
+        final TextView textView = root.findViewById(R.id.textView13);
+        sendViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

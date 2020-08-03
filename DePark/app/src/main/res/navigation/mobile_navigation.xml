@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.depark.ui.home.HomeFragment"
+        android:name="com.example.depark.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.depark.ui.gallery.GalleryFragment"
+        android:name="com.example.depark.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_share"
+        android:id="@+id/nav_profile"
         android:name="com.example.depark.ProfileFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="com.example.depark.ui.send.SendFragment"
+        android:name="com.example.depark.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
 </navigation>

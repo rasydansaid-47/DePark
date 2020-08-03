@@ -1,16 +1,16 @@
-package com.example.depark.ui.send;
+package com.example.depark;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SendViewModel extends ViewModel {
+public class GalleryViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SendViewModel() {
+    public GalleryViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Contact Us!\nPlease fill this form in a decent manner");
+        mText.setValue("This is Valet Management App.\nUser must fill this form for this service.");
     }
 
     public LiveData<String> getText() {

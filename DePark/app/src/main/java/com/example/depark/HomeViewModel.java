@@ -1,4 +1,4 @@
-package com.example.depark.ui.home;
+package com.example.depark;
 
         import androidx.lifecycle.LiveData;
         import androidx.lifecycle.MutableLiveData;
