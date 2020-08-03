@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.depark">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <meta-data
         android:name="com.google.android.gms.vision.DEPENDENCIES"
@@ -18,12 +20,13 @@
         android:roundIcon="@mipmap/ic_home_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PasswordActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".LoginActivity"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

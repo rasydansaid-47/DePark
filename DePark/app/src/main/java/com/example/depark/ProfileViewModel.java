@@ -1,14 +1,14 @@
-package com.example.depark.ui.share;
+package com.example.depark;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ShareViewModel extends ViewModel {
+public class ProfileViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ShareViewModel() {
+    public ProfileViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("USERNAME\n EMAIL\n PHONENUMBER\n");
     }

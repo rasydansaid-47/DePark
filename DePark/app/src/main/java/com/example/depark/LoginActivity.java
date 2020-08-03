@@ -3,6 +3,7 @@ package com.example.depark;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText e1,e2;
-    private TextView e3,e4;
+    private TextView t1,t2,t3;
     private Button b1;
     private FirebaseAuth firebaseAuth;
     private int counter = 5;
@@ -31,35 +32,56 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        e1 = (EditText)findViewById(R.id.txtUsername);
-        e2 = (EditText)findViewById(R.id.txtPwd);
-        e3 = (TextView)findViewById(R.id.txtInfo);
-        e4 = (TextView)findViewById(R.id.txtRegister);
-        b1 = (Button)findViewById(R.id.btnLogin);
+        e1 = findViewById(R.id.txtUsername);
+        e2 = findViewById(R.id.txtPwd);
+        t1 = findViewById(R.id.txtInfo);
+        t2 = findViewById(R.id.txtRegister);
+        t3 = findViewById(R.id.txtForgotPasswrd);
+        b1 = findViewById(R.id.btnLogin);
 
-        e3.setText("No of attempts remaining: 5");
+        t1.setText("No of attempts remaining: 5");
 
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        if(user != null){
-            finish();
+        if(firebaseAuth.getCurrentUser() != null){
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            finish();
         }
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate(e1.getText().toString(),e2.getText().toString());
+                String s1 = e1.getText().toString();
+                String s2 = e2.getText().toString();
+
+                if (TextUtils.isEmpty(s1)) {
+                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(s2)) {
+                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                validate(s1,s2);
             }
         });
 
-        e4.setOnClickListener(new View.OnClickListener() {
+        t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        t3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, PasswordActivity.class));
             }
         });
     }
@@ -73,13 +95,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                    checkEmailVerification();
                 }
                 else{
                     Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
                     counter--;
-                    e3.setText("No of Attempts Remaining: " + counter);
+                    t1.setText("No of Attempts Remaining: " + counter);
                     progressDialog.dismiss();
                     if(counter == 0){
                         b1.setEnabled(false);
@@ -88,4 +109,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void checkEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
+        Boolean emailflag = firebaseUser.isEmailVerified();
+
+        if(emailflag){
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        }
+        else{
+            Toast.makeText(LoginActivity.this,"Verify your Email",Toast.LENGTH_SHORT).show();
+            firebaseAuth.signOut();
+        }
+    }
+
 }

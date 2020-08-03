@@ -21,14 +21,18 @@
     <item android:title="Management">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_profile"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="@string/menu_share" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/menu_send" />
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/menu_logout" />
         </menu>
     </item>
-
 </menu>
