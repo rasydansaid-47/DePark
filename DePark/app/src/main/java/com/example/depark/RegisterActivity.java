@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_registration);
         setupUIView();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -85,12 +85,12 @@ public class RegisterActivity extends AppCompatActivity{
     }
 
     private void setupUIView() {
-        e1 = findViewById(R.id.txtName);
-        e2 = findViewById(R.id.txtEmail);
-        e3 = findViewById(R.id.txtPwd);
-        e4 = findViewById(R.id.txtCPwd);
+        e1 = findViewById(R.id.etName);
+        e2 = findViewById(R.id.etEmail);
+        e3 = findViewById(R.id.pass);
+        e4 = findViewById(R.id.confirmPass);
         t1 = findViewById(R.id.txtLogin);
-        b1 = findViewById(R.id.btnRegister);
+        b1 = findViewById(R.id.regBtn);
     }
 
     private Boolean validate(){

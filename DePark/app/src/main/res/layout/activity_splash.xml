@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/colorBackgroundSplash">
+    android:background="@color/main">
 
     <ImageView
         android:id="@+id/logo_id"
@@ -20,5 +20,5 @@
         android:layout_marginEnd="46dp"
         android:layout_marginRight="46dp"
         android:layout_marginBottom="224dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/png" />
 </RelativeLayout>
