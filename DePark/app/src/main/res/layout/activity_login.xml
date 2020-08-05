@@ -20,8 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:hint="Username"
-        android:ems="10"/>
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
     <EditText
         android:id="@+id/txtPwd"
         android:layout_width="wrap_content"

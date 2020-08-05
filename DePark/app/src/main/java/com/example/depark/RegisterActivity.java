@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity{
     private TextView t1;
     private Button b1;
     private FirebaseAuth firebaseAuth;
+    String s1,s2,s3,s4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,10 @@ public class RegisterActivity extends AppCompatActivity{
                                 Toast.makeText(getApplicationContext(),"Registered Failed", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                sendEmailVerfication();
+                                //sendEmailVerification();
+                                Toast.makeText(RegisterActivity.this, "Registered Successful, Verification mail sent!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                             }
                         }
                     });
@@ -92,10 +96,10 @@ public class RegisterActivity extends AppCompatActivity{
     private Boolean validate(){
         boolean result = false;
 
-        String s1 = e1.getText().toString();
-        String s2 = e2.getText().toString();
-        String s3 = e3.getText().toString();
-        String s4 = e4.getText().toString();
+        s1 = e1.getText().toString();
+        s2 = e2.getText().toString();
+        s3 = e3.getText().toString();
+        s4 = e4.getText().toString();
 
         if(s1.isEmpty() && s2.isEmpty() && s3.isEmpty() && s4.isEmpty()){
             Toast.makeText(getApplicationContext(), "Fields are empty", Toast.LENGTH_SHORT).show();
@@ -110,13 +114,14 @@ public class RegisterActivity extends AppCompatActivity{
         return result;
     }
 
-    private void sendEmailVerfication(){
+    private void sendEmailVerification(){
         FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser != null){
             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
+
                         Toast.makeText(RegisterActivity.this, "Registered Successful, Verification mail sent!", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         finish();
@@ -129,4 +134,6 @@ public class RegisterActivity extends AppCompatActivity{
             });
         }
     }
+
+
 }

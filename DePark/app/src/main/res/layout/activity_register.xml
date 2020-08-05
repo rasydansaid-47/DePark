@@ -21,13 +21,24 @@
         android:layout_marginLeft="100dp"
         android:hint="Username"
         android:ems="10"/>
+
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
+        android:ems="10"
         android:hint="Email"
-        android:ems="10" />
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/txtAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:ems="10"
+        android:hint="Age"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/txtPwd"
@@ -48,9 +59,9 @@
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="212dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="150dp"
         android:text="Register" />
 
     <TextView
