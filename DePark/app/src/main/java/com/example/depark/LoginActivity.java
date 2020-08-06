@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText e1,e2;
-    private TextView t1,t2,t3;
+    private TextView t1,t2;
     private Button b1;
     private FirebaseAuth firebaseAuth;
     private int counter = 5;
@@ -34,12 +34,11 @@ public class LoginActivity extends AppCompatActivity {
 
         e1 = findViewById(R.id.txtUsername);
         e2 = findViewById(R.id.txtPwd);
-        t1 = findViewById(R.id.txtInfo);
-        t2 = findViewById(R.id.txtRegister);
-        t3 = findViewById(R.id.txtForgotPasswrd);
+        t1 = findViewById(R.id.txtRegister);
+        t2 = findViewById(R.id.txtForgotPasswrd);
         b1 = findViewById(R.id.btnLogin);
 
-        t1.setText("No of attempts remaining: 5");
+        Toast.makeText(getApplicationContext(),"No of attempts remaining: 5", Toast.LENGTH_SHORT).show();
 
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
@@ -70,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        t2.setOnClickListener(new View.OnClickListener() {
+        t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -78,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        t3.setOnClickListener(new View.OnClickListener() {
+        t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, PasswordActivity.class));
@@ -100,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
                     counter--;
-                    t1.setText("No of Attempts Remaining: " + counter);
+                    Toast.makeText(getApplicationContext(),"No of attempts remaining: " + counter, Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                     if(counter == 0){
                         b1.setEnabled(false);

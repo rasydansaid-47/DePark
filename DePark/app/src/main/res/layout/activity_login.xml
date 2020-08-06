@@ -8,14 +8,6 @@
 
     <EditText
         android:id="@+id/txtUsername"
-<<<<<<< HEAD
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
-=======
         android:layout_width="310dp"
         android:layout_height="50sp"
         android:ems="10"
@@ -29,7 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.928" />
 
->>>>>>> fcc5733a7d4c6a631fc96cae71f5072f68309ace
     <EditText
         android:id="@+id/txtPwd"
         android:layout_width="310dp"
