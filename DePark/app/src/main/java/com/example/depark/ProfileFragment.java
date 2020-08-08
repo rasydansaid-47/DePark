@@ -1,48 +1,103 @@
 package com.example.depark;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
-public class ProfileFragment extends Fragment {
+@SuppressWarnings("unused")
+public class ProfileFragment extends Activity {
 
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference userReference;
     private FirebaseAuth firebaseAuth;
-    private ProfileViewModel profileViewModel;
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        final TextView textView = root.findViewById(R.id.textView11);
-        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    //Firebase storage
+    FirebaseStorage firebaseStorage;
+    StorageReference storageReference;
+
+    String name, address, phone, image;
+    ImageView img;
+    TextView t1, t2;
+    ImageButton b1, b2;
+
+
+    protected void onCreate(Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_profile);
+
+        img = findViewById(R.id.imgProfile);
+        t1 = findViewById(R.id.tvName);
+        t2 = findViewById(R.id.tvEmail);
+        b1 = findViewById(R.id.btnUpdate);
+        b2 = findViewById(R.id.btnChange);
+
+        //Init Firebase
+        firebaseStorage = FirebaseStorage.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        StorageReference storageReference = firebaseStorage.getReference();
+            storageReference.child(firebaseAuth.getUid()).
+
+        child("Images/Profile Pic").
+
+        getDownloadUrl().
+
+        addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onSuccess (Uri uri){
+                Picasso.get().load(uri).fit().centerCrop().into(img);
             }
         });
-        return root;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        firebaseAuth = FirebaseAuth.getInstance();
-        setHasOptionsMenu(true);
-    }
+            databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot){
+                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                t1.setText("Name: " + userProfile.getUserName());
+                t2.setText("Email: " + userProfile.getUserEmail());
+            }
 
+            @Override
+            public void onCancelled (DatabaseError databaseError){
+                Toast.makeText(getApplicationContext(), databaseError.getCode(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+            b1.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick (View view){
+            startActivity(new Intent(ProfileFragment.this, UpdateProfileActivity.class));
+        }
+        });
+
+            b2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view){
+            startActivity(new Intent(ProfileFragment.this, UpdatePassword.class));
+        }
+        });
+    }
 }
