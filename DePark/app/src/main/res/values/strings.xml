@@ -11,4 +11,8 @@
     <string name="menu_share">Profile</string>
     <string name="menu_send">Feedback</string>
     <string name="menu_logout">LogOut</string>
+    <string name="title_activity_main_admin">MainAdminActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
 </resources>

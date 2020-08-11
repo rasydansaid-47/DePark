@@ -21,8 +21,9 @@
         android:roundIcon="@mipmap/ic_home_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdatePassword"></activity>
-        <activity android:name=".ProfileFragment"></activity>
+        <activity android:name=".MainAdminActivity"></activity>
+        <activity android:name=".UpdatePassword" />
+        <activity android:name=".ProfileFragment" />
         <activity android:name=".UpdateProfileActivity" />
         <activity android:name=".PasswordActivity" />
         <activity

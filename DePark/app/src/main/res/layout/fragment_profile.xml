@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView9"
         app:layout_constraintVertical_bias="0.772"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/tvName"
