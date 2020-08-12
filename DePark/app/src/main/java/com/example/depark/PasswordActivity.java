@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class PasswordActivity extends AppCompatActivity {
 
-    private TextView t1,t2;
     private EditText e1;
     private Button b1;
     private FirebaseAuth firebaseAuth;
@@ -27,14 +26,9 @@ public class PasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
 
-        t1 = findViewById(R.id.tvInfo);
-        t2 = findViewById(R.id.tvInfo2);
         e1 = findViewById(R.id.etEmailPassword);
         b1 = findViewById(R.id.btnPasswordReset);
         firebaseAuth = firebaseAuth.getInstance();
-
-        t1.setText("<b>Did somebody forgot their password?</b>");
-        t1.setText("That`s ok." + "Just enter the email address you`ve used to" + "register with us and we`ll send a reset link!");
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override

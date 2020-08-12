@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class UpdatePassword extends AppCompatActivity {
 
     private Button b1;
+    private ImageView b2;
     private EditText e1;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
@@ -29,6 +31,7 @@ public class UpdatePassword extends AppCompatActivity {
 
         e1 = findViewById(R.id.etNewPassword);
         b1 = findViewById(R.id.btnUpdatePassword);
+        b2 = findViewById(R.id.backBtn2);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -49,6 +52,13 @@ public class UpdatePassword extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UpdatePassword.this, ProfileFragment.class));
+                finish();
             }
         });
     }

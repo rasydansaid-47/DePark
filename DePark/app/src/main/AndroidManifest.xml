@@ -16,9 +16,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_home"
+        android:icon="@mipmap/ic_newicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_home_round"
+        android:roundIcon="@mipmap/ic_newicon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainAdminActivity"></activity>
