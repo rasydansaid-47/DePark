@@ -10,4 +10,7 @@
     <color name="light_gray">#E8EBEC</color>
     <color name="gray">#253A4B</color>
     <color name="main">#fec305</color>
+
+    <color name="colorMessage">#6363bf</color>
+    <color name="colorMessageDark">#5b5bab</color>
 </resources>

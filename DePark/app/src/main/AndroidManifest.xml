@@ -21,7 +21,10 @@
         android:roundIcon="@mipmap/ic_newhome_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainAdminActivity"></activity>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".TimeFragment" />
+        <activity android:name=".ValetFragment" />
+        <activity android:name=".MainAdminActivity" />
         <activity android:name=".UpdatePassword" />
         <activity android:name=".ProfileFragment" />
         <activity android:name=".UpdateProfileActivity" />
@@ -31,7 +34,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".ForumFragment" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

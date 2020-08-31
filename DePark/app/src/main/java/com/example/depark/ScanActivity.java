@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,13 +15,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.zxing.Result;
-
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
-
 import static android.Manifest.permission.CAMERA;
 
-public class QrScanner extends AppCompatActivity implements ZXingScannerView.ResultHandler {
-
+public class ScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
     private static int camId = Camera.CameraInfo.CAMERA_FACING_BACK;
@@ -115,7 +111,7 @@ public class QrScanner extends AppCompatActivity implements ZXingScannerView.Res
     }
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(QrScanner.this)
+        new AlertDialog.Builder(ScanActivity.this)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", null)
@@ -125,23 +121,18 @@ public class QrScanner extends AppCompatActivity implements ZXingScannerView.Res
 
     @Override
     public void handleResult(Result result) {
+
         final String myResult = result.getText();
         Log.d("QRCodeScanner", result.getText());
         Log.d("QRCodeScanner", result.getBarcodeFormat().toString());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
+        builder.setTitle("");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                scannerView.resumeCameraPreview(QrScanner.this);
-            }
-        });
-        builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myResult));
-                startActivity(browserIntent);
+                Intent intent = new Intent(ScanActivity.this, ParkingActivity.class);
+                startActivity(intent);
             }
         });
         builder.setMessage(result.getText());

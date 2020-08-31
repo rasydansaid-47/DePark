@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_profile, R.id.nav_send, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_qrcode, R.id.nav_forum,R.id.nav_time,
+                R.id.nav_profile, R.id.nav_report, R.id.nav_logout)
                 .setDrawerLayout(drawerLayout)
                 .build();
 
@@ -54,17 +54,24 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id){
                     case R.id.nav_home:
-                        Toast.makeText(getApplicationContext(),"Home is selected!",Toast.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this,HomeFragment.class));
                         break;
-
+                    case R.id.nav_qrcode:
+                        startActivity(new Intent(MainActivity.this,QrCodeFragment.class));
+                        break;
+                    case R.id.nav_valet:
+                        startActivity(new Intent(MainActivity.this,ValetFragment.class));
+                        break;
+                    case R.id.nav_time:
+                        startActivity(new Intent(MainActivity.this,TimeFragment.class));
+                        break;
                     case R.id.nav_profile:
-                        Toast.makeText(getApplicationContext(),"Profile is selected!",Toast.LENGTH_LONG).show();
                         startActivity(new Intent(MainActivity.this,ProfileFragment.class));
                         break;
-
+                    case R.id.nav_forum:
+                        startActivity(new Intent(MainActivity.this,ForumFragment.class));
+                        break;
                     case R.id.nav_logout:
-                        Toast.makeText(getApplicationContext(),"Logout is selected!",Toast.LENGTH_LONG).show();
                         logout();
                 }
                 return true;

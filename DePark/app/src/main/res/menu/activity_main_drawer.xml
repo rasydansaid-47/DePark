@@ -9,13 +9,21 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_qrcode"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_qrcode" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_time"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_time" />
+        <item
+            android:id="@+id/nav_valet"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_valet" />
+        <item
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_forum" />
     </group>
 
     <item android:title="Management">
@@ -23,11 +31,11 @@
             <item
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/ic_menu_manage"
-                android:title="@string/menu_share" />
+                android:title="@string/menu_profile" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_report"
                 android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
+                android:title="@string/menu_report" />
 
             <item
                 android:id="@+id/nav_logout"
