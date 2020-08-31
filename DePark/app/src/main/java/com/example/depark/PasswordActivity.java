@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class PasswordActivity extends AppCompatActivity {
 
     private EditText e1;
     private Button b1;
+    private ImageView b2;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -28,6 +30,7 @@ public class PasswordActivity extends AppCompatActivity {
 
         e1 = findViewById(R.id.etEmailPassword);
         b1 = findViewById(R.id.btnPasswordReset);
+        b2 = findViewById(R.id.backBtn);
         firebaseAuth = firebaseAuth.getInstance();
 
         b1.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +55,14 @@ public class PasswordActivity extends AppCompatActivity {
                        }
                    });
                 }
+            }
+        });
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
+                finish();
             }
         });
     }
