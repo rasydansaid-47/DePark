@@ -21,8 +21,11 @@
         android:roundIcon="@mipmap/ic_newhome_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".TimeFragment" />
+        <activity android:name=".QrCodeFragment" />
+        <activity android:name=".HomeFragment" />
+        <activity android:name=".FeedbackFragment" />
         <activity android:name=".ValetFragment" />
         <activity android:name=".MainAdminActivity" />
         <activity android:name=".UpdatePassword" />

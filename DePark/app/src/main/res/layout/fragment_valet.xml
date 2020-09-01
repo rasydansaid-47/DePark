@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etTypeCar"
         android:layout_width="310dp"
         android:layout_height="50sp"
         android:layout_marginBottom="36dp"
@@ -49,13 +49,13 @@
         android:hint="Type of Car"
         android:inputType="textPersonName"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/etCarPlate"
         app:layout_constraintEnd_toEndOf="@+id/text_gallery"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="@+id/text_gallery" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/etCarPlate"
         android:layout_width="310dp"
         android:layout_height="50sp"
         android:background="@drawable/input_field"
@@ -65,12 +65,12 @@
         android:hint="Car Plate No."
         android:inputType="textPersonName"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintBottom_toTopOf="@+id/etTime"
         app:layout_constraintEnd_toEndOf="@+id/text_gallery"
         app:layout_constraintStart_toStartOf="@+id/text_gallery" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/etTime"
         android:layout_width="310dp"
         android:layout_height="50sp"
         android:background="@drawable/input_field"
@@ -80,12 +80,12 @@
         android:hint="Time"
         android:inputType="textPersonName"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
         app:layout_constraintEnd_toEndOf="@+id/text_gallery"
         app:layout_constraintStart_toStartOf="@+id/text_gallery" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSubmit"
         android:layout_width="162dp"
         android:layout_height="53dp"
         android:layout_marginBottom="60dp"
@@ -106,10 +106,10 @@
         android:gravity="center"
         android:text="TextView"
         android:textColor="@color/main"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/etCarPlate"
         app:layout_constraintEnd_toEndOf="@+id/text_gallery"
         app:layout_constraintStart_toStartOf="@+id/text_gallery"
         app:layout_constraintTop_toTopOf="@+id/text_gallery"
-        app:layout_constraintVertical_bias="0.646" />
+        app:layout_constraintVertical_bias="0.319" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

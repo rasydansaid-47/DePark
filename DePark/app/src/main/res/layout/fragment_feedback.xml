@@ -14,14 +14,14 @@
         android:layout_marginTop="92dp"
         android:layout_marginEnd="8dp"
         android:background="@color/black"
+        android:gravity="center_horizontal"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057"
-        android:gravity="center_horizontal" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView12"
@@ -36,62 +36,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="237dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="28dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/editText4"
-        app:layout_constraintEnd_toEndOf="@+id/text_send"
-        app:layout_constraintStart_toStartOf="@+id/text_send" />
-
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/etUserName"
         android:layout_width="310dp"
         android:layout_height="50sp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Full Name"
+        android:inputType="textPersonName"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/editText5"
+        app:layout_constraintBottom_toTopOf="@+id/etUserEmail"
         app:layout_constraintEnd_toEndOf="@+id/text_send"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/text_send" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/etUserEmail"
         android:layout_width="310dp"
         android:layout_height="50sp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Email"
+        android:inputType="textPersonName"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/editText7"
+        app:layout_constraintBottom_toTopOf="@+id/typeFeedback"
         app:layout_constraintEnd_toEndOf="@+id/text_send"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/text_send" />
+
+    <Spinner
+        android:id="@+id/typeFeedback"
+        android:layout_width="310dp"
+        android:layout_height="50sp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/input_field"
+        android:ems="10"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/etMessage"
+        app:layout_constraintEnd_toEndOf="@+id/text_send"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/text_send" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/etMessage"
         android:layout_width="310dp"
         android:layout_height="154dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/input_field"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/btnSend"
         app:layout_constraintEnd_toEndOf="@+id/text_send"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/text_send" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSend"
         android:layout_width="194dp"
         android:layout_height="50dp"
         android:layout_marginBottom="44dp"

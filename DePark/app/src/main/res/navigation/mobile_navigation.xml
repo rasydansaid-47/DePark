@@ -30,20 +30,20 @@
         tools:layout="@layout/fragment_forum" />
 
     <fragment
-        android:id="@+id/nav_report"
-        android:name="com.example.depark.SendFragment"
+        android:id="@+id/nav_feedback"
+        android:name="com.example.depark.FeedbackFragment"
         android:label="@string/menu_report"
-        tools:layout="@layout/fragment_report"/>
+        tools:layout="@layout/fragment_feedback"/>
 
     <fragment
         android:id="@+id/nav_valet"
-        android:name="com.example.depark.SendFragment"
+        android:name="com.example.depark.ValetFragment"
         android:label="@string/menu_valet"
         tools:layout="@layout/fragment_valet"/>
 
     <fragment
         android:id="@+id/nav_qrcode"
-        android:name="com.example.depark.SendFragment"
+        android:name="com.example.depark.QrCodeFragment"
         android:label="@string/menu_qrcode"
         tools:layout="@layout/fragment_qrcode"/>
 </navigation>

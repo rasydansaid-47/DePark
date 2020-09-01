@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity{
     }
 
     private void setupUIView() {
-        e1 = findViewById(R.id.etName);
+        e1 = findViewById(R.id.etUserName);
         e2 = findViewById(R.id.etEmail);
         e3 = findViewById(R.id.pass);
         e4 = findViewById(R.id.confirmPass);
