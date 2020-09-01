@@ -113,15 +113,9 @@
 
     <ImageView
         android:id="@+id/imageView4"
-<<<<<<< HEAD
-        android:layout_width="225dp"
-        android:layout_height="53dp"
-        app:layout_constraintBottom_toTopOf="@+id/etUserName"
-=======
         android:layout_width="307dp"
         android:layout_height="189dp"
-        app:layout_constraintBottom_toTopOf="@+id/etName"
->>>>>>> de46cf49c6b13510c60bf7881e035ad42bbf1720
+        app:layout_constraintBottom_toTopOf="@+id/etUserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
