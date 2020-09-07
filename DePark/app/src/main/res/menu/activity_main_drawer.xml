@@ -16,6 +16,10 @@
             android:id="@+id/nav_valet"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_valet" />
+        <item
+            android:id="@+id/nav_time"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_time" />
     </group>
 
     <item android:title="Management">
