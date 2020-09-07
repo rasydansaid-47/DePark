@@ -4,112 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/main">
 
-    <TextView
-        android:id="@+id/text_gallery"
-        android:layout_width="317dp"
-        android:layout_height="591dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/white"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="225dp"
+        android:layout_height="68dp"
+        android:background="@drawable/valet"
+        app:layout_constraintBottom_toTopOf="@+id/etTypeCar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.435" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="184dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="72dp"
-        android:background="@color/main"
-        android:fontFamily="@font/bold"
-        android:text="Valet Form"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.268"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etTypeCar"
+    <Button
+        android:id="@+id/btnSubmit"
         android:layout_width="310dp"
         android:layout_height="50sp"
-        android:layout_marginBottom="36dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/bold"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.926" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="310dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="52dp"
         android:background="@drawable/input_field"
-        android:ems="10"
+        android:fontFamily="@font/regular"
         android:gravity="center"
-        android:hint="Type of Car"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/etCarPlate"
-        app:layout_constraintEnd_toEndOf="@+id/text_gallery"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="@+id/text_gallery" />
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/etCarPlate"
         android:layout_width="310dp"
         android:layout_height="50sp"
-        android:background="@drawable/input_field"
         android:layout_marginBottom="28dp"
+        android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:gravity="center"
         android:hint="Car Plate No."
         android:inputType="textPersonName"
-        android:textColor="@color/colorAccent"
+        android:textAlignment="center"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/etTime"
-        app:layout_constraintEnd_toEndOf="@+id/text_gallery"
-        app:layout_constraintStart_toStartOf="@+id/text_gallery" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/etTime"
         android:layout_width="310dp"
         android:layout_height="50sp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/input_field"
-        android:layout_marginBottom="64dp"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:gravity="center"
         android:hint="Time"
         android:inputType="textPersonName"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-        app:layout_constraintEnd_toEndOf="@+id/text_gallery"
-        app:layout_constraintStart_toStartOf="@+id/text_gallery" />
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="162dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/button"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="false"
-        android:textSize="22sp"
-        android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="@+id/text_gallery"
-        app:layout_constraintEnd_toEndOf="@+id/text_gallery"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="@+id/text_gallery" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="211dp"
-        android:layout_height="98dp"
+    <EditText
+        android:id="@+id/etTypeCar"
+        android:layout_width="310dp"
+        android:layout_height="50sp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/input_field"
+        android:ems="10"
+        android:fontFamily="@font/regular"
         android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/main"
+        android:hint="Type of Car"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/etCarPlate"
-        app:layout_constraintEnd_toEndOf="@+id/text_gallery"
-        app:layout_constraintStart_toStartOf="@+id/text_gallery"
-        app:layout_constraintTop_toTopOf="@+id/text_gallery"
-        app:layout_constraintVertical_bias="0.319" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

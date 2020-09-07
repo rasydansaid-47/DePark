@@ -4,103 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/main">
 
-    <TextView
-        android:id="@+id/text_send"
-        android:layout_width="319dp"
-        android:layout_height="587dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/black"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <EditText
+        android:id="@+id/etMessage"
+        android:layout_width="310dp"
+        android:layout_height="281dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/input_field"
+        android:ems="10"
+        android:fontFamily="@font/regular"
+        android:inputType="textMultiLine"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/btnSend"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="185dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="60dp"
-        android:background="@color/colorAccent"
-        android:gravity="center"
-        android:text="Feedback"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etUserName"
-        android:layout_width="310dp"
-        android:layout_height="50sp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/input_field"
-        android:ems="10"
-        android:hint="Full Name"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/etUserEmail"
-        app:layout_constraintEnd_toEndOf="@+id/text_send"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/text_send" />
-
-    <EditText
-        android:id="@+id/etUserEmail"
-        android:layout_width="310dp"
-        android:layout_height="50sp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/input_field"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/typeFeedback"
-        app:layout_constraintEnd_toEndOf="@+id/text_send"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/text_send" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
         android:id="@+id/typeFeedback"
         android:layout_width="310dp"
         android:layout_height="50sp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="52dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/etMessage"
-        app:layout_constraintEnd_toEndOf="@+id/text_send"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/text_send" />
-
-    <EditText
-        android:id="@+id/etMessage"
-        android:layout_width="310dp"
-        android:layout_height="154dp"
-        android:layout_marginBottom="28dp"
-        android:background="@drawable/input_field"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/btnSend"
-        app:layout_constraintEnd_toEndOf="@+id/text_send"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/text_send" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnSend"
-        android:layout_width="194dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="310dp"
+        android:layout_height="50sp"
+        android:background="@drawable/input_field"
+        android:fontFamily="@font/bold"
         android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="@+id/text_send"
-        app:layout_constraintEnd_toEndOf="@+id/text_send"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="262dp"
+        android:layout_height="81dp"
+        android:background="@drawable/feedback"
+        app:layout_constraintBottom_toTopOf="@+id/typeFeedback"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/text_send" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.423" />
 </androidx.constraintlayout.widget.ConstraintLayout>

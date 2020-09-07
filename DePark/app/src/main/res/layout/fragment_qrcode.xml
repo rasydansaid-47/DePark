@@ -4,68 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <TextView
-        android:id="@+id/text_slideshow"
-        android:layout_width="306dp"
-        android:layout_height="567dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal" />
+    android:background="@color/main">
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="137dp"
-        android:layout_height="114dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="204dp"
+        android:layout_height="66dp"
+        android:background="@drawable/ticket"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_ticket_round" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnscan"
-        android:layout_width="187dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="40dp"
-        android:text="Scan QrCode"
+        android:layout_width="310dp"
+        android:layout_height="50sp"
+        android:background="@drawable/input_field"
+        android:fontFamily="@font/bold"
         android:onClick="goToAttract"
-        app:layout_constraintBottom_toBottomOf="@+id/text_slideshow"
-        app:layout_constraintEnd_toEndOf="@+id/text_slideshow"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/text_slideshow" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="231dp"
-        android:layout_height="147dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center_vertical"
-        android:text="TextView"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnscan"
-        app:layout_constraintEnd_toEndOf="@+id/text_slideshow"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/text_slideshow" />
+        android:text="Scan QrCode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="217dp"
-        android:layout_height="157dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView14"
-        app:layout_constraintEnd_toEndOf="@+id/text_slideshow"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="@+id/text_slideshow"
+        android:layout_width="310dp"
+        android:layout_height="256dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@mipmap/ic_qrcode" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="391dp"
+        android:layout_height="204dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnscan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.952"
+        app:srcCompat="@drawable/guide" />
 </androidx.constraintlayout.widget.ConstraintLayout>
