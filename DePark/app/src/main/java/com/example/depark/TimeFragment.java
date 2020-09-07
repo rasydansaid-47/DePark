@@ -2,49 +2,75 @@ package com.example.depark;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.Chronometer;
-import android.widget.TextClock;
+import android.widget.DigitalClock;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class TimeFragment extends AppCompatActivity {
 
-    Chronometer meter;
-    double i=0;
-    TextClock c1;
+    private Chronometer meter;
+    private long pauseOffset;
+    private boolean running;
+    final Context context = this;
+    double pay = 0;
+    long hours;
+    String g,e;
+    DigitalClock c1;
     TextView t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_time);
-        c1 = (TextClock) findViewById(R.id.textClock);
-        meter = (Chronometer) findViewById(R.id.chronometer);
-        t1 = (TextView) findViewById(R.id.textview1);
+        c1 = findViewById(R.id.textClock);
+        meter = findViewById(R.id.chronometer);
+        t1 = findViewById(R.id.textview1);
+        hours = SystemClock.elapsedRealtime() - meter.getBase();
 
-        meter.setFormat("Time: %S");
-        meter.setBase(SystemClock.elapsedRealtime());
+        startChronometer();
         meter.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                if ((SystemClock.elapsedRealtime() - chronometer.getBase()) <= 11700) {
-                    chronometer.setBase(SystemClock.elapsedRealtime());
-                    i = 3.00;
-                    t1.setText("RM"+i);
-                    Toast.makeText(TimeFragment.this, "Bing!", Toast.LENGTH_SHORT).show();
+                if(SystemClock.elapsedRealtime() - meter.getBase() < 11700){
+                    pay = 2.0;
+                    t1.setText("RM"+pay);
                 }
-                else{
-                    if ((SystemClock.elapsedRealtime() - chronometer.getBase()) >= 11700) {
-                        chronometer.setBase(SystemClock.elapsedRealtime());
-                        i = 3.00 + 1.00;
-                        t1.setText("RM"+i);
-                        Toast.makeText(TimeFragment.this, "Bing!", Toast.LENGTH_SHORT).show();
-                    }
+                else if (SystemClock.elapsedRealtime() - meter.getBase() > 11700){
+                    pay = 2.0 + ((hours - 11700));
+                    t1.setText("RM"+pay);
                 }
             }
         });
-        
+    }
+
+    public void startChronometer(){
+        if(!running){
+            meter.setBase(SystemClock.elapsedRealtime());
+            meter.start();
+            running = true;
+        }
+    }
+
+    public void pauseChronometer(){
+        if(running){
+            meter.stop();
+            pauseOffset = SystemClock.elapsedRealtime() - meter.getBase();
+            running = false;
+        }
+    }
+
+    public void endChronometer(){
+        meter.setBase(SystemClock.elapsedRealtime());
+        pauseOffset = 0;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

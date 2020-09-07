@@ -36,7 +36,7 @@ public class MainAdminActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_qrcode, R.id.nav_valet,
-                R.id.nav_profile, R.id.nav_forum, R.id.nav_logout)
+                R.id.nav_profile,  R.id.nav_logout)
                 .setDrawerLayout(drawerLayout)
                 .build();
 
@@ -61,9 +61,6 @@ public class MainAdminActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_profile:
                         startActivity(new Intent(MainAdminActivity.this,ProfileFragment.class));
-                        break;
-                    case R.id.nav_forum:
-                        startActivity(new Intent(MainAdminActivity.this,ForumFragment.class));
                         break;
                     case R.id.nav_logout:
                         logout();

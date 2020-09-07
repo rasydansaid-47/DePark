@@ -18,8 +18,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.BreakIterator;
 
 public class RegisterActivity extends AppCompatActivity{
 
@@ -42,32 +47,33 @@ public class RegisterActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 if(validate()){
-                    String s1 = e2.getText().toString().trim();
-                    String s2 = e3.getText().toString().trim();
+                    s1 = e1.getText().toString().trim();
+                    s2 = e2.getText().toString().trim();
+                    s3 = e3.getText().toString().trim();
 
-                    if (TextUtils.isEmpty(s1)) {
+                    if (TextUtils.isEmpty(s2)) {
                         Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    if (TextUtils.isEmpty(s2)) {
+                    if (TextUtils.isEmpty(s3)) {
                         Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    if (s2.length() < 6) {
+                    if (s3.length() < 6) {
                         Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    firebaseAuth.createUserWithEmailAndPassword(s1,s2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.createUserWithEmailAndPassword(s2,s3).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
                                 Toast.makeText(getApplicationContext(),"Registered Failed", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                sendEmailVerification();
+                                sendEmailVerification(s1,s2);
                                 Toast.makeText(RegisterActivity.this, "Registered Successful, Upload completed!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
@@ -116,18 +122,18 @@ public class RegisterActivity extends AppCompatActivity{
         return result;
     }
 
-    private void sendEmailVerification(){
-        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
+    private void sendEmailVerification(final String username, final String useremail){
+        final FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser != null){
             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        sendUserData();
+                        sendUserData(username,useremail);
                         Toast.makeText(RegisterActivity.this, "Registered Successful, Verification mail sent!", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         finish();
-                        startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                        startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                     }
                     else{
                         Toast.makeText(RegisterActivity.this, "Verification mail has not been sent!", Toast.LENGTH_SHORT).show();
@@ -137,10 +143,10 @@ public class RegisterActivity extends AppCompatActivity{
         }
     }
 
-    private void sendUserData(){
+    private void sendUserData(final String username, final String useremail){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
-        UserProfile userProfile = new UserProfile(s1,s2);
+        UserProfile userProfile = new UserProfile(username,useremail);
         myRef.setValue(userProfile);
     }
 }

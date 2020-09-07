@@ -24,12 +24,6 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/nav_forum"
-        android:name="com.example.depark.ForumFragment"
-        android:label="@string/menu_forum"
-        tools:layout="@layout/fragment_forum" />
-
-    <fragment
         android:id="@+id/nav_feedback"
         android:name="com.example.depark.FeedbackFragment"
         android:label="@string/menu_report"

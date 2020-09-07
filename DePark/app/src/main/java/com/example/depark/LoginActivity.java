@@ -47,8 +47,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-
-
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,5 +146,4 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signOut();
         }
     }
-
 }

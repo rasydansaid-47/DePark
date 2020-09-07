@@ -2,6 +2,8 @@ package com.example.depark;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +19,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ValetFragment extends Activity {
+
+    private static final String TAG = "FeedbackFragment";
+    private static final String REQUIRED = "Required";
+    private DatabaseReference databaseReference;
 
     FirebaseUser firebaseUser;
     FirebaseAuth firebaseAuth;
@@ -38,35 +47,78 @@ public class ValetFragment extends Activity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserValet userFeedback = snapshot.getValue(UserValet.class);
-                e1.setText(userFeedback.getTypeCar());
-                e2.setText(userFeedback.getUserCarPlate());
-                e3.setText(userFeedback.getTime());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), error.getCode(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String typecar = e1.getText().toString();
-                String carplate = e2.getText().toString();
-                String time = e3.getText().toString();
-
-                UserValet userValet = new UserValet(typecar, carplate, time);
-                databaseReference.setValue(userValet);
-
+                submitValet();
                 Toast.makeText(getApplicationContext(),"Valet Appointment been sended", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void submitValet(){
+        final String typecar = e1.getText().toString();
+        final String carplate = e2.getText().toString();
+        final String time = e3.getText().toString();
+
+        if (TextUtils.isEmpty(typecar)) {
+            e3.setError(REQUIRED);
+            return;
+        }
+
+        if (TextUtils.isEmpty(carplate)) {
+            e3.setError(REQUIRED);
+            return;
+        }
+
+        if (TextUtils.isEmpty(time)) {
+            e3.setError(REQUIRED);
+            return;
+        }
+
+        // User data change listener
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserProfile user = dataSnapshot.getValue(UserProfile.class);
+
+                if (user == null) {
+                    Log.e(TAG, "onDataChange: User data is null!");
+                    Toast.makeText(ValetFragment.this, "onDataChange: User data is null!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                writeNewMessage(typecar, carplate, time);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.e(TAG, "onCancelled: Failed to read user!");
+            }
+        });
+
+    }
+
+    private void writeNewMessage(String typecar, String carplate, String time) {
+        Valet valet = new Valet(getUsernameFromEmail(firebaseUser.getEmail()), typecar, carplate, time);
+
+        Map<String, Object> feedbackValues = valet.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        String key = databaseReference.child("messages").push().getKey();
+
+        childUpdates.put("/valet/" + key, feedbackValues);
+
+        databaseReference.updateChildren(childUpdates);
+    }
+
+    private String getUsernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
     }
 }

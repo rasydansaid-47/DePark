@@ -2,6 +2,8 @@ package com.example.depark;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,7 +24,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FeedbackFragment extends Activity implements AdapterView.OnItemSelectedListener {
+
+    private static final String TAG = "FeedbackFragment";
+    private static final String REQUIRED = "Required";
+    private DatabaseReference databaseReference;
 
     EditText e1, e2, e3;
     Button b1;
@@ -37,8 +46,6 @@ public class FeedbackFragment extends Activity implements AdapterView.OnItemSele
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_feedback);
-        e1 = (EditText) findViewById(R.id.etUserName);
-        e2 = (EditText) findViewById(R.id.etUserEmail);
         e3 = (EditText) findViewById(R.id.etMessage);
         s1 = (Spinner) findViewById(R.id.typeFeedback);
         b1 = (Button) findViewById(R.id.btnSend);
@@ -46,49 +53,17 @@ public class FeedbackFragment extends Activity implements AdapterView.OnItemSele
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, TypeofFeedback);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter);
         s1.setOnItemSelectedListener(this);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserFeedback userFeedback = snapshot.getValue(UserFeedback.class);
-                e1.setText(userFeedback.getUserName());
-                e2.setText(userFeedback.getUserEmail());
-                e3.setText(userFeedback.getUserMessage());
-                userFeedback.getTypeFeedback(type);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), error.getCode(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = e1.getText().toString();
-                String email = e2.getText().toString();
-                String message = e3.getText().toString();
-
-                UserFeedback userFeedback = new UserFeedback(email, name, message, type);
-                databaseReference.setValue(userFeedback);
-
-                firebaseUser.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),"Email Update", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Email Update Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                submitFeedback();
             }
         });
     }
@@ -98,9 +73,60 @@ public class FeedbackFragment extends Activity implements AdapterView.OnItemSele
         type = TypeofFeedback[i];
     }
 
-
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         Toast.makeText(getApplicationContext(), "Invalid Input",Toast.LENGTH_SHORT).show();
+    }
+
+    private void submitFeedback(){
+        final String body = e3.getText().toString();
+
+        if (TextUtils.isEmpty(body)) {
+            e3.setError(REQUIRED);
+            return;
+        }
+
+        // User data change listener
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserProfile user = dataSnapshot.getValue(UserProfile.class);
+
+                if (user == null) {
+                    Log.e(TAG, "onDataChange: User data is null!");
+                    Toast.makeText(FeedbackFragment.this, "onDataChange: User data is null!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                writeNewMessage(body,type);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.e(TAG, "onCancelled: Failed to read user!");
+            }
+        });
+
+    }
+
+    private void writeNewMessage(String body, String type) {
+        Feedback feedback = new Feedback(getUsernameFromEmail(firebaseUser.getEmail()), body, type);
+
+        Map<String, Object> feedbackValues = feedback.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        String key = databaseReference.child("messages").push().getKey();
+
+        childUpdates.put("/feedback/" + key, feedbackValues);
+
+        databaseReference.updateChildren(childUpdates);
+    }
+
+    private String getUsernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
     }
 }
