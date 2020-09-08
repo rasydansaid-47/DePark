@@ -37,12 +37,12 @@ public class TimeFragment extends AppCompatActivity {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
                 if(SystemClock.elapsedRealtime() - meter.getBase() < 11700){
-                    pay = 2.0;
-                    t1.setText("RM"+pay);
+                    pay = 2.00;
+                    t1.setText("Total fee: RM "+pay);
                 }
                 else if (SystemClock.elapsedRealtime() - meter.getBase() > 11700){
-                    pay = 2.0 + ((hours - 11700));
-                    t1.setText("RM"+pay);
+                    pay = 2.00 + ((hours - 11700));
+                    t1.setText("Total fee: RM "+pay);
                 }
             }
         });
