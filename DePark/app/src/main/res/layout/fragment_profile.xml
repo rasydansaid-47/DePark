@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.849" />
+        app:layout_constraintVertical_bias="0.623" />
 
     <TextView
         android:id="@+id/text_share"
@@ -37,46 +37,49 @@
 
     <ImageView
         android:id="@+id/imgProfile"
-        android:layout_width="152dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="177dp"
+        android:layout_height="162dp"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintBottom_toTopOf="@+id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="300dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="304dp"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
         android:background="@drawable/input_field"
         android:fontFamily="@font/regular"
         android:gravity="center_vertical"
         android:text="TextView"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/text_share"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
         app:layout_constraintEnd_toEndOf="@+id/text_share"
-        app:layout_constraintStart_toStartOf="@+id/text_share" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/text_share"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
 
     <TextView
         android:id="@+id/tvEmail"
-        android:layout_width="300dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="196dp"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="180dp"
+        android:background="@drawable/input_field"
         android:fontFamily="@font/regular"
         android:gravity="center_vertical"
         android:text="TextView"
-        android:background="@drawable/input_field"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/text_share"
         app:layout_constraintEnd_toEndOf="@+id/text_share"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/text_share"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        app:layout_constraintVertical_bias="0.984" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/btnUpdate"
