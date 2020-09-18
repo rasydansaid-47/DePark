@@ -4,46 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TimeFragment">
+    tools:context=".TimeFragment"
+    android:background="@color/main">
 
     <DigitalClock
         android:id="@+id/textClock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:fontFamily="@font/digital"
         android:format12Hour="hh:mm:ss a"
-        android:textColor="#F1511B"
-        android:textSize="45dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/chronometer"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.857" />
 
     <Chronometer
         android:id="@+id/chronometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="285dp"
+        android:layout_height="130dp"
         android:layout_marginBottom="64dp"
+        android:fontFamily="@font/digital"
         android:format12Hour="hh:mm:ss a"
-        android:textColor="#F151"
-        android:textSize="45dp"
-        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="60dp"
         app:layout_constraintBottom_toTopOf="@+id/textview1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="134dp"
+        android:layout_height="143dp"
+        android:background="@drawable/timer"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 
     <TextView
         android:id="@+id/textview1"
-        android:layout_width="175dp"
-        android:layout_height="82dp"
-        android:layout_marginBottom="228dp"
+        android:layout_width="288dp"
+        android:layout_height="87dp"
+        android:fontFamily="@font/regular"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.955" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="290dp"
+        android:layout_height="79dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.065"
+        app:srcCompat="@drawable/timefee" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

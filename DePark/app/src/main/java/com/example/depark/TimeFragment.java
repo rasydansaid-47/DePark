@@ -38,17 +38,18 @@ public class TimeFragment extends AppCompatActivity {
             public void onChronometerTick(Chronometer chronometer) {
                 long myElapsedMillis = SystemClock.elapsedRealtime() - meter.getBase();
                 double seconds = myElapsedMillis * 0.001;
-                if(seconds <= 11700){
+                if (seconds <= 11700) {
                     pay = 2.0;
-                    t1.setText("RM"+pay);
-                }
-                else if (seconds > 11700){
+                    t1.setText("RM" + pay);
+                } else if (seconds > 11700) {
                     pay = 2.0 + ((seconds % 11700));
-                    t1.setText("RM"+pay);
+                    t1.setText("RM" + pay);
+
                 }
             }
         });
     }
+
 
     public void startChronometer(){
         if(!running){

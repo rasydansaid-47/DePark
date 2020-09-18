@@ -55,7 +55,7 @@ public class ValetFragment extends Activity {
             @Override
             public void onClick(View view) {
                 submitValet();
-                Toast.makeText(getApplicationContext(),"Valet Appointment been sended", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Valet Appointment has been sent", Toast.LENGTH_SHORT).show();
             }
         });
     }
