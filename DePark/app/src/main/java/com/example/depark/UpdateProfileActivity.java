@@ -45,6 +45,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
     private FirebaseUser firebaseUser;
+    private DatabaseReference databaseReference;
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
 
@@ -80,10 +81,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = firebaseAuth.getCurrentUser();
         progressDialog = new ProgressDialog(this);
-
-        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        databaseReference = firebaseDatabase.getReference("users");
         storageReference = firebaseStorage.getReference();
 
         //Display Image from Firebase Storage
@@ -101,14 +101,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 img.setMinimumWidth(dm.widthPixels);
                 img.setImageBitmap(bm);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
             }
         });
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
@@ -149,8 +150,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 progressDialog.setMessage("Profile Pic is uploading..");
                 progressDialog.show();
 
-                UserProfile userProfile = new UserProfile(email, name);
-                databaseReference.setValue(userProfile);
+                UserProfile userProfile = new UserProfile(name, email);
+                databaseReference.child(firebaseUser.getUid()).setValue(userProfile);
 
                 firebaseUser.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

@@ -36,12 +36,14 @@ public class TimeFragment extends AppCompatActivity {
         meter.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                if(SystemClock.elapsedRealtime() - meter.getBase() < 11700){
+                long myElapsedMillis = SystemClock.elapsedRealtime() - meter.getBase();
+                double seconds = myElapsedMillis * 0.001;
+                if(seconds <= 11700){
                     pay = 2.0;
                     t1.setText("RM"+pay);
                 }
-                else if (SystemClock.elapsedRealtime() - meter.getBase() > 11700){
-                    pay = 2.0 + ((hours - 11700));
+                else if (seconds > 11700){
+                    pay = 2.0 + ((seconds % 11700));
                     t1.setText("RM"+pay);
                 }
             }

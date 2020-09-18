@@ -1,8 +1,10 @@
 package com.example.depark;
 
 import android.content.Intent;
+import android.icu.lang.UScript;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,8 +21,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FederatedAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,16 +38,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private NavController navController;
+    private DatabaseReference databaseReference;
 
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
     FirebaseStorage firebaseStorage;
+    FirebaseUser firebaseUser;
     StorageReference storageReference;
-    DatabaseReference databaseReference;
 
     TextView t1, t2;
     ImageView img;
@@ -67,8 +71,29 @@ public class MainActivity extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        databaseReference = firebaseDatabase.getReference("users");
 
-        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        databaseReference.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserProfile user = dataSnapshot.getValue(UserProfile.class);
+
+                if (user == null) {
+                    Log.e(TAG, "User data is null!");
+                    Toast.makeText(MainActivity.this, "User data is null!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                t1.setText(user.getUserName());
+                t2.setText(user.getUserEmail());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.e(TAG, "Failed to read user!");
+            }
+        });
 
         storageReference = firebaseStorage.getReference();
         storageReference.child(firebaseAuth.getUid()).
@@ -83,20 +108,6 @@ public class MainActivity extends AppCompatActivity {
                         Picasso.get().load(uri).fit().centerCrop().into(img);
                     }
                 });
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange (DataSnapshot dataSnapshot){
-                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                t1.setText(userProfile.getUserName());
-                t2.setText(userProfile.getUserEmail());
-            }
-
-            @Override
-            public void onCancelled (DatabaseError databaseError){
-                Toast.makeText(getApplicationContext(), databaseError.getCode(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_qrcode, R.id.nav_time,

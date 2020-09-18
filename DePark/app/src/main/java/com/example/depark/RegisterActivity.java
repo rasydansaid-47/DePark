@@ -129,7 +129,9 @@ public class RegisterActivity extends AppCompatActivity{
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        sendUserData(username,useremail);
+                        //sendUserData(username,useremail);
+                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                        writeNewUser(firebaseUser.getUid(), username, useremail);
                         Toast.makeText(RegisterActivity.this, "Registered Successful, Verification mail sent!", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         finish();
@@ -143,10 +145,24 @@ public class RegisterActivity extends AppCompatActivity{
         }
     }
 
-    private void sendUserData(final String username, final String useremail){
+    /*private void sendUserData(final String username, final String useremail){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
         UserProfile userProfile = new UserProfile(username,useremail);
         myRef.setValue(userProfile);
+    }*/
+
+    private void writeNewUser(String userId, String username, String email) {
+        UserProfile user = new UserProfile(username, email);
+
+        firebaseDatabase.getInstance().getReference().child("users").child(userId).setValue(user);
+    }
+
+    private String getUsernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
     }
 }

@@ -27,6 +27,7 @@ public class ValetFragment extends Activity {
     private static final String TAG = "FeedbackFragment";
     private static final String REQUIRED = "Required";
     private DatabaseReference databaseReference;
+    private DatabaseReference mRef;
 
     FirebaseUser firebaseUser;
     FirebaseAuth firebaseAuth;
@@ -47,7 +48,8 @@ public class ValetFragment extends Activity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        databaseReference = firebaseDatabase.getReference("users");
+        mRef = firebaseDatabase.getReference();
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +81,7 @@ public class ValetFragment extends Activity {
         }
 
         // User data change listener
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserProfile user = dataSnapshot.getValue(UserProfile.class);
@@ -104,14 +106,14 @@ public class ValetFragment extends Activity {
     private void writeNewMessage(String typecar, String carplate, String time) {
         Valet valet = new Valet(getUsernameFromEmail(firebaseUser.getEmail()), typecar, carplate, time);
 
-        Map<String, Object> feedbackValues = valet.toMap();
+        Map<String, Object> valetValues = valet.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
 
-        String key = databaseReference.child("messages").push().getKey();
+        String key = mRef.child("messages").push().getKey();
 
-        childUpdates.put("/valet/" + key, feedbackValues);
+        childUpdates.put("/valet/" + key, valetValues);
 
-        databaseReference.updateChildren(childUpdates);
+        mRef.updateChildren(childUpdates);
     }
 
     private String getUsernameFromEmail(String email) {

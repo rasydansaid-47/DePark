@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +29,12 @@ public class ProfileFragment extends Activity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference userReference;
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     //Firebase storage
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
+    DatabaseReference databaseReference;
 
     String name, address, phone, image;
     ImageView img;
@@ -40,7 +43,6 @@ public class ProfileFragment extends Activity {
 
 
     protected void onCreate(Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_profile);
 
@@ -50,28 +52,24 @@ public class ProfileFragment extends Activity {
         b1 = findViewById(R.id.btnUpdate);
         b2 = findViewById(R.id.btnChange);
 
-        //Init Firebase
         firebaseStorage = FirebaseStorage.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-
-        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        firebaseUser = firebaseAuth.getCurrentUser();
+        databaseReference = firebaseDatabase.getReference("users");
 
         StorageReference storageReference = firebaseStorage.getReference();
             storageReference.child(firebaseAuth.getUid()).
-
-        child("Images/Profile Pic").
-
-        getDownloadUrl().
-
-        addOnSuccessListener(new OnSuccessListener<Uri>() {
+            child("Images/Profile Pic").
+                    getDownloadUrl().
+                    addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess (Uri uri){
                 Picasso.get().load(uri).fit().centerCrop().into(img);
             }
         });
 
-            databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange (DataSnapshot dataSnapshot){
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
@@ -85,17 +83,17 @@ public class ProfileFragment extends Activity {
             }
         });
 
-            b1.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick (View view){
+        b1.setOnClickListener(new View.OnClickListener()
+    {
+        public void onClick (View view){
             startActivity(new Intent(ProfileFragment.this, UpdateProfileActivity.class));
         }
         });
 
-            b2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view){
+        b2.setOnClickListener(new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view){
             startActivity(new Intent(ProfileFragment.this, UpdatePassword.class));
         }
         });

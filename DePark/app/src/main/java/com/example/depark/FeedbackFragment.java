@@ -31,7 +31,7 @@ public class FeedbackFragment extends Activity implements AdapterView.OnItemSele
 
     private static final String TAG = "FeedbackFragment";
     private static final String REQUIRED = "Required";
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, mRef;
 
     EditText e1, e2, e3;
     Button b1;
@@ -53,7 +53,8 @@ public class FeedbackFragment extends Activity implements AdapterView.OnItemSele
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        databaseReference = firebaseDatabase.getReference("users");
+        mRef = firebaseDatabase.getReference();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, TypeofFeedback);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -64,6 +65,7 @@ public class FeedbackFragment extends Activity implements AdapterView.OnItemSele
             @Override
             public void onClick(View view) {
                 submitFeedback();
+                Toast.makeText(FeedbackFragment.this, "Your Feedback been submitted.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -87,7 +89,7 @@ public class FeedbackFragment extends Activity implements AdapterView.OnItemSele
         }
 
         // User data change listener
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserProfile user = dataSnapshot.getValue(UserProfile.class);
@@ -115,11 +117,11 @@ public class FeedbackFragment extends Activity implements AdapterView.OnItemSele
         Map<String, Object> feedbackValues = feedback.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
 
-        String key = databaseReference.child("messages").push().getKey();
+        String key = mRef.child("messages").push().getKey();
 
         childUpdates.put("/feedback/" + key, feedbackValues);
 
-        databaseReference.updateChildren(childUpdates);
+        mRef.updateChildren(childUpdates);
     }
 
     private String getUsernameFromEmail(String email) {
