@@ -1,0 +1,42 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_admin_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.depark.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_feedback_list"
+        android:name="com.example.depark.FeedbackListFragment"
+        android:label="@string/menu_feedback_list"
+        tools:layout="@layout/feedback_list_fragment" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.depark.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_customer_list"
+        android:name="com.example.depark.CustomerListFragment"
+        android:label="@string/menu_user_list"
+        tools:layout="@layout/customer_list_fragment"/>
+
+    <fragment
+        android:id="@+id/nav_valet_list"
+        android:name="com.example.depark.ValetListFragment"
+        android:label="@string/menu_valet_list"
+        tools:layout="@layout/valet_list_fragment"/>
+
+    <fragment
+        android:id="@+id/nav_qrcode"
+        android:name="com.example.depark.QrCodeFragment"
+        android:label="@string/menu_qrcode"
+        tools:layout="@layout/fragment_qrcode"/>
+</navigation>

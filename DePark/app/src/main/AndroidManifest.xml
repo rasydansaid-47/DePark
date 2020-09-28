@@ -21,6 +21,9 @@
         android:roundIcon="@mipmap/ic_newhome_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ValetListFragment"></activity>
+        <activity android:name=".CustomerListFragment" />
+        <activity android:name=".FeedbackListFragment" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".ParkingActivity" />
         <activity android:name=".TimeFragment" />

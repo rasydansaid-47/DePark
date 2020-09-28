@@ -21,6 +21,10 @@ public class Valet{
         this.time = time;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
     public String getTypeCar() {
         return typeCar;
     }

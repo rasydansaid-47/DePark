@@ -84,30 +84,56 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validate(String username, String userpasswrd){
+        final String useremail = username;
         progressDialog.setMessage("Hello There!");
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(username, userpasswrd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    progressDialog.dismiss();
-                    checkEmailVerification();
-                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }
-                else {
-                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                    counter--;
-                    Toast.makeText(getApplicationContext(), "No of attempts remaining: " + counter, Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    if (counter == 0) {
-                        b1.setEnabled(false);
+        if (useremail.equals("rasydansaidazmirais@gmail.com")){
+            firebaseAuth.signInWithEmailAndPassword(useremail, userpasswrd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        progressDialog.dismiss();
+                        checkEmailVerification();
+                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(LoginActivity.this, MainAdminActivity.class));
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                        counter--;
+                        Toast.makeText(getApplicationContext(), "No of attempts remaining: " + counter, Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        if (counter == 0) {
+                            b1.setEnabled(false);
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        else {
+            firebaseAuth.signInWithEmailAndPassword(useremail, userpasswrd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        progressDialog.dismiss();
+                        checkEmailVerification();
+                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
+                    else {
+                        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                        counter--;
+                        Toast.makeText(getApplicationContext(), "No of attempts remaining: " + counter, Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        if (counter == 0) {
+                            b1.setEnabled(false);
+                        }
+                    }
+                }
+            });
+        }
     }
 
     private void checkEmailVerification(){

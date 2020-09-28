@@ -11,7 +11,7 @@ public class Feedback{
 
     public String author;
     public String body;
-    public String typeFeedback;
+    private String typeFeedback;
 
     public Feedback() {
     }
@@ -19,6 +19,25 @@ public class Feedback{
     public Feedback(String author, String body, String typeFeedback) {
         this.author = author;
         this.body = body;
+        this.typeFeedback = typeFeedback;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    public String getBody() {
+        return body;
+    }
+    public void setBody(String body) {
+        this.body = body;
+    }
+    public String getTypeFeedback() {
+        return typeFeedback;
+    }
+    public void setTypeFeedback(String typeFeedback) {
         this.typeFeedback = typeFeedback;
     }
 

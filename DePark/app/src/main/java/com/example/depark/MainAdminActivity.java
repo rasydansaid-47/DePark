@@ -11,32 +11,104 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class MainAdminActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainAdminActivity";
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawerLayout;
-    private FirebaseAuth firebaseAuth;
     private NavigationView navigationView;
     private NavController navController;
+    private DatabaseReference databaseReference;
+
+    FirebaseDatabase firebaseDatabase;
+    FirebaseAuth firebaseAuth;
+    FirebaseStorage firebaseStorage;
+    FirebaseUser firebaseUser;
+    StorageReference storageReference;
+
+    TextView t1, t2;
+    ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_admin);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        View navHeaderView = navigationView.getHeaderView(0);
+        img = navHeaderView.findViewById(R.id.imageView_nav);
+        t1 = navHeaderView.findViewById(R.id.tv_nav_Name);
+        t2 = navHeaderView.findViewById(R.id.tv_nav_Email);
+
+        firebaseStorage = FirebaseStorage.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        databaseReference = firebaseDatabase.getReference("users");
+
+        databaseReference.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserProfile user = dataSnapshot.getValue(UserProfile.class);
+
+                if (user == null) {
+                    Log.e(TAG, "User data is null!");
+                    Toast.makeText(MainAdminActivity.this, "User data is null!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                t1.setText(user.getUserName());
+                t2.setText(user.getUserEmail());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.e(TAG, "Failed to read user!");
+            }
+        });
+
+        storageReference = firebaseStorage.getReference();
+        storageReference.child(firebaseAuth.getUid()).
+
+                child("Images/Profile Pic").
+
+                getDownloadUrl().
+
+                addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess (Uri uri){
+                        Picasso.get().load(uri).fit().centerCrop().into(img);
+                    }
+                });
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_qrcode, R.id.nav_valet,
-                R.id.nav_profile,  R.id.nav_logout)
+                R.id.nav_home, R.id.nav_qrcode, R.id.nav_feedback_list, R.id.nav_customer_list,
+                R.id.nav_valet_list, R.id.nav_profile,  R.id.nav_logout)
                 .setDrawerLayout(drawerLayout)
                 .build();
 
@@ -53,11 +125,17 @@ public class MainAdminActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         startActivity(new Intent(MainAdminActivity.this,HomeFragment.class));
                         break;
+                    case R.id.nav_customer_list:
+                        startActivity(new Intent(MainAdminActivity.this,CustomerListFragment.class));
+                        break;
                     case R.id.nav_qrcode:
                         startActivity(new Intent(MainAdminActivity.this,QrCodeFragment.class));
                         break;
-                    case R.id.nav_valet:
-                        startActivity(new Intent(MainAdminActivity.this,ValetFragment.class));
+                    case R.id.nav_valet_list:
+                        startActivity(new Intent(MainAdminActivity.this,ValetListFragment.class));
+                        break;
+                    case R.id.nav_feedback_list:
+                        startActivity(new Intent(MainAdminActivity.this,FeedbackListFragment.class));
                         break;
                     case R.id.nav_profile:
                         startActivity(new Intent(MainAdminActivity.this,ProfileFragment.class));
