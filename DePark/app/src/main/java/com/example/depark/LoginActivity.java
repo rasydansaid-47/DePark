@@ -88,13 +88,12 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Hello There!");
         progressDialog.show();
 
-        if (useremail.equals("rasydansaidazmirais@gmail.com")){
+        if (useremail.equals("admin@gmail.com")){
             firebaseAuth.signInWithEmailAndPassword(useremail, userpasswrd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
-                        checkEmailVerification();
                         Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                         finish();
                         startActivity(new Intent(LoginActivity.this, MainAdminActivity.class));

@@ -1,5 +1,6 @@
 package com.example.depark;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.text.TextUtils;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +32,9 @@ public class ParkingActivity extends AppCompatActivity {
     private static final String REQUIRED = "Required";
     private DatabaseReference databaseReference;
     private DatabaseReference mRef;
-    private String lot;
+    private String lot, lot_ava;
+
+    ArrayList<String> parkinglot = new ArrayList<>();
 
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
@@ -168,17 +172,17 @@ public class ParkingActivity extends AppCompatActivity {
                     mRef.child("Parking-lot").child(parking_lot).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            StatusLot lotnum =  snapshot.getValue(StatusLot.class);
+                            String status = snapshot.child("status").getValue().toString();
 
-                            if (lotnum == null) {
+                            if (status == null) {
                                 Log.e(TAG, "User data is null!");
                                 Toast.makeText(ParkingActivity.this, "User data is null!", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            else if (lotnum.equals("Green")) {
+                            else if (status.equals("Green")) {
                                 String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
                                 Parking parking = new Parking(getUsernameFromEmail(firebaseUser.getEmail()), parking_lot, time);
-                                String status = "Red";
+                                String newstatus = "Red";
 
                                 Map<String, Object> parkingValues = parking.toMap();
                                 Map<String, Object> childUpdates = new HashMap<>();
@@ -188,15 +192,17 @@ public class ParkingActivity extends AppCompatActivity {
                                 childUpdates.put("/booking/" + key, parkingValues);
 
                                 mRef.updateChildren(childUpdates);
-                                mRef.child("Parking-lot").child(parking_lot).setValue(status);
+                                mRef.child("Parking-lot").child(parking_lot).child("status").setValue(newstatus);
+
+                                Intent intent = new Intent(ParkingActivity.this, TimeFragment.class);
+                                startActivity(intent);
                             }
-                            else if (lotnum.equals("Red")){
+                            else if (status.equals("Red")){
                                 Log.e(TAG, "Parking Lot Booked!");
                                 Toast.makeText(ParkingActivity.this, "This Parking Lot already been booking", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                             Log.e(TAG, "Failed to read user!");

@@ -13,9 +13,9 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_user_list" />
         <item
-            android:id="@+id/nav_qrcode"
+            android:id="@+id/nav_booking_list"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_qrcode" />
+            android:title="@string/menu_booking_list" />
         <item
             android:id="@+id/nav_valet_list"
             android:icon="@drawable/ic_menu_slideshow"

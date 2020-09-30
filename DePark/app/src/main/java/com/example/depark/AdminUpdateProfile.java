@@ -35,7 +35,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
-public class UpdateProfileActivity extends AppCompatActivity {
+public class AdminUpdateProfile extends AppCompatActivity {
 
     private EditText e1, e2;
     private Button b1;
@@ -71,7 +71,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_profile);
+        setContentView(R.layout.admin_update_profile);
 
         e1 = findViewById(R.id.etNameUpdate);
         e2 = findViewById(R.id.etEmailUpdate);
@@ -84,7 +84,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         progressDialog = new ProgressDialog(this);
-        databaseReference = firebaseDatabase.getReference("users");
+        databaseReference = firebaseDatabase.getReference("admin");
         storageReference = firebaseStorage.getReference();
 
         //Display Image from Firebase Storage
@@ -107,15 +107,16 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
 
-            }
-        });
+                    }
+                });
 
-        databaseReference.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                e1.setText(userProfile.getUserName());
-                e2.setText(userProfile.getUserEmail());
+                String name = dataSnapshot.child("name").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                e1.setText(name);
+                e2.setText(email);
             }
 
             @Override
@@ -155,11 +156,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(UpdateProfileActivity.this,"Email Update", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminUpdateProfile.this,"Email Update", Toast.LENGTH_SHORT).show();
                             sendEmailVerification();
                             finish();
                         }else{
-                            Toast.makeText(UpdateProfileActivity.this,"Email Update Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminUpdateProfile.this,"Email Update Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -181,14 +182,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Upload failed!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(UpdateProfileActivity.this, ProfileFragment.class));
+                        startActivity(new Intent(AdminUpdateProfile.this, ProfileFragment.class));
                     }
                 }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Upload successful!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(UpdateProfileActivity.this, ProfileFragment.class));
+                        startActivity(new Intent(AdminUpdateProfile.this, ProfileFragment.class));
                     }
                 });
                 finish();
@@ -203,12 +204,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(UpdateProfileActivity.this, "Email Update, Verification Email is being sent!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminUpdateProfile.this, "Email Update, Verification Email is being sent!", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         finish();
                         //startActivity(new Intent(EditProfile.this, MainActivity.class));
                     }else{
-                        Toast.makeText(UpdateProfileActivity.this, "Verification Email hasn't been sent!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminUpdateProfile.this, "Verification Email hasn't been sent!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

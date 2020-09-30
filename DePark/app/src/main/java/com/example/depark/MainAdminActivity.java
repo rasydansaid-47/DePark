@@ -69,20 +69,15 @@ public class MainAdminActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        databaseReference = firebaseDatabase.getReference("users");
+        databaseReference = firebaseDatabase.getReference("admin");
 
-        databaseReference.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                UserProfile user = dataSnapshot.getValue(UserProfile.class);
-
-                if (user == null) {
-                    Log.e(TAG, "User data is null!");
-                    Toast.makeText(MainAdminActivity.this, "User data is null!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                t1.setText(user.getUserName());
-                t2.setText(user.getUserEmail());
+                String name = dataSnapshot.child("name").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                t1.setText(name);
+                t2.setText(email);
             }
 
             @Override
@@ -107,7 +102,7 @@ public class MainAdminActivity extends AppCompatActivity {
                 });
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_qrcode, R.id.nav_feedback_list, R.id.nav_customer_list,
+                R.id.nav_home, R.id.nav_booking_list, R.id.nav_feedback_list, R.id.nav_customer_list,
                 R.id.nav_valet_list, R.id.nav_profile,  R.id.nav_logout)
                 .setDrawerLayout(drawerLayout)
                 .build();
@@ -128,8 +123,8 @@ public class MainAdminActivity extends AppCompatActivity {
                     case R.id.nav_customer_list:
                         startActivity(new Intent(MainAdminActivity.this,CustomerListFragment.class));
                         break;
-                    case R.id.nav_qrcode:
-                        startActivity(new Intent(MainAdminActivity.this,QrCodeFragment.class));
+                    case R.id.nav_booking_list:
+                        startActivity(new Intent(MainAdminActivity.this,BookingListFragment.class));
                         break;
                     case R.id.nav_valet_list:
                         startActivity(new Intent(MainAdminActivity.this,ValetListFragment.class));

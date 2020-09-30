@@ -35,8 +35,8 @@
         tools:layout="@layout/valet_list_fragment"/>
 
     <fragment
-        android:id="@+id/nav_qrcode"
-        android:name="com.example.depark.QrCodeFragment"
-        android:label="@string/menu_qrcode"
-        tools:layout="@layout/fragment_qrcode"/>
+        android:id="@+id/nav_booking_list"
+        android:name="com.example.depark.BookingListFragment"
+        android:label="@string/menu_booking_list"
+        tools:layout="@layout/booking_list_fragment"/>
 </navigation>
