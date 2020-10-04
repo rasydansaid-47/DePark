@@ -103,7 +103,7 @@ public class MainAdminActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_booking_list, R.id.nav_feedback_list, R.id.nav_customer_list,
-                R.id.nav_valet_list, R.id.nav_profile,  R.id.nav_logout)
+                R.id.nav_valet_list, R.id.nav_customer_list, R.id.nav_profile,  R.id.nav_logout)
                 .setDrawerLayout(drawerLayout)
                 .build();
 
@@ -128,6 +128,9 @@ public class MainAdminActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_valet_list:
                         startActivity(new Intent(MainAdminActivity.this,ValetListFragment.class));
+                        break;
+                    case R.id.nav_condition_list:
+                        startActivity(new Intent(MainAdminActivity.this,ConditionListFragment.class));
                         break;
                     case R.id.nav_feedback_list:
                         startActivity(new Intent(MainAdminActivity.this,FeedbackListFragment.class));

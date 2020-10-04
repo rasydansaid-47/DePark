@@ -20,7 +20,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-public class HomeFragment extends Fragment {
+public class AdminHomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FirebaseStorage firebaseStorage;
@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_admin_home, container, false);
         final TextView textView = root.findViewById(R.id.textView2);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

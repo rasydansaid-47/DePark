@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView t1,t2;
     private Button b1;
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
     private int counter = 5;
     private ProgressDialog progressDialog;
 
@@ -43,7 +44,12 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if(firebaseAuth.getCurrentUser() != null){
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            if(firebaseAuth.getCurrentUser().equals("admin@gmail.com")){
+                startActivity(new Intent(LoginActivity.this,MainAdminActivity.class));
+            }
+            else{
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            }
             finish();
         }
 

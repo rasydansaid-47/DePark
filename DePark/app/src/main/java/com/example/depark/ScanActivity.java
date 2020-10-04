@@ -135,7 +135,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
                 startActivity(intent);
             }
         });
-        builder.setMessage(result.getText());
+        builder.setMessage("Welcome!!");
         AlertDialog alert1 = builder.create();
         alert1.show();
     }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 @IgnoreExtraProperties
 public class Parking {
+    private String ref;
     public String author;
     public String lot;
     public String time;
@@ -15,7 +16,8 @@ public class Parking {
     public Parking() {
     }
 
-    public Parking(String author, String lot, String time) {
+    public Parking(String ref, String author, String lot, String time) {
+        this.ref = ref;
         this.author = author;
         this.lot = lot;
         this.time = time;
@@ -24,6 +26,7 @@ public class Parking {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("ref", ref);
         result.put("author", author);
         result.put("lot", lot);
         result.put("time", time);

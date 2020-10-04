@@ -3,6 +3,7 @@ package com.example.depark;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -22,7 +23,7 @@ public class HomeViewModel extends ViewModel {
     private static final String TAG = "HomeFragment";
     private FirebaseUser firebaseUser;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, mRef;
     private FirebaseAuth firebaseAuth;
 
     public HomeViewModel() {
@@ -31,13 +32,25 @@ public class HomeViewModel extends ViewModel {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         databaseReference = firebaseDatabase.getReference("users");
+        mRef =  firebaseDatabase.getReference();
         databaseReference.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserProfile user = dataSnapshot.getValue(UserProfile.class);
 
                 if (user == null) {
-                    Log.e(TAG, "User data is null!");
+                    mRef.child("admin").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String admin = snapshot.child("name").getValue().toString();
+                            mText.setValue("Welcome, " + admin);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                     return;
                 }
                 mText.setValue("Welcome, " + user.getUserName());

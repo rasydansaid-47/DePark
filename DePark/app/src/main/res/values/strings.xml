@@ -12,11 +12,13 @@
     <string name="menu_qrcode">eParking Ticket</string>
     <string name="menu_time">Parking Fee Measurement</string>
     <string name="menu_report">Feedback</string>
+    <string name="menu_receipt_list">Receipt List</string>
 
     <string name="menu_valet_list">Valet List</string>
     <string name="menu_booking_list">Booking List</string>
     <string name="menu_user_list">Customer List</string>
     <string name="menu_feedback_list">Feedback List</string>
+    <string name="menu_condition_list">Parking List</string>
 
     <string name="title_activity_main_admin">MainAdminActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

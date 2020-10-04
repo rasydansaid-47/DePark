@@ -40,4 +40,10 @@
         android:name="com.example.depark.QrCodeFragment"
         android:label="@string/menu_qrcode"
         tools:layout="@layout/fragment_qrcode"/>
+
+    <fragment
+        android:id="@+id/nav_receipt_list"
+        android:name="com.example.depark.ReceiptListFragement"
+        android:label="@string/menu_receipt_list"
+        tools:layout="@layout/receipt_list_fragement"/>
 </navigation>

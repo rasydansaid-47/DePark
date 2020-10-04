@@ -6,9 +6,9 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.depark.HomeFragment"
+        android:name="com.example.depark.AdminHomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_admin_home" />
 
     <fragment
         android:id="@+id/nav_feedback_list"
@@ -33,6 +33,12 @@
         android:name="com.example.depark.ValetListFragment"
         android:label="@string/menu_valet_list"
         tools:layout="@layout/valet_list_fragment"/>
+
+    <fragment
+        android:id="@+id/nav_condition_list"
+        android:name="com.example.depark.ConditionListFragment"
+        android:label="@string/menu_condition_list"
+        tools:layout="@layout/condition_list_fragment"/>
 
     <fragment
         android:id="@+id/nav_booking_list"

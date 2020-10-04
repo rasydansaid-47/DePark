@@ -1,5 +1,6 @@
 package com.example.depark;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class ParkingActivity extends AppCompatActivity {
 
@@ -156,6 +159,13 @@ public class ParkingActivity extends AppCompatActivity {
 
     private void submitBooking(String lot){
         final String parking_lot = lot;
+        final int min = 10;
+        final int max = 80;
+        final int random = new Random().nextInt((max - min) + 1) + min;
+        final String ref = Integer.toString(random);
+        final String formatAmount = "test";
+        final String state = "test";
+        final String date = "end";
 
         // User data change listener
         databaseReference.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -169,38 +179,58 @@ public class ParkingActivity extends AppCompatActivity {
                     return;
                 }
                 else{
-                    mRef.child("Parking-lot").child(parking_lot).addListenerForSingleValueEvent(new ValueEventListener() {
+                    mRef.child("Parking-lot").orderByChild("name").equalTo(parking_lot).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String status = snapshot.child("status").getValue().toString();
+                            for (DataSnapshot childSnapshot: snapshot.getChildren()) {
+                                String lot_key = childSnapshot.getKey();
+                                String status = childSnapshot.child("status").getValue().toString();
 
-                            if (status == null) {
-                                Log.e(TAG, "User data is null!");
-                                Toast.makeText(ParkingActivity.this, "User data is null!", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                            else if (status.equals("Green")) {
-                                String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-                                Parking parking = new Parking(getUsernameFromEmail(firebaseUser.getEmail()), parking_lot, time);
-                                String newstatus = "Red";
+                                if (status == null) {
+                                    Log.e(TAG, "User data is null!");
+                                    Toast.makeText(ParkingActivity.this, "User data is null!", Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else if (status.equals("Green")) {
+                                    String author = getUsernameFromEmail(firebaseUser.getEmail());
+                                    String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                                    String newstatus = "Red";
+                                    Parking parking = new Parking(ref, getUsernameFromEmail(firebaseUser.getEmail()), parking_lot, time);
+                                    Request request = new Request(ref, author, time, formatAmount, state);
+                                    Receipt receipt = new Receipt(ref, author, parking_lot, time, date, formatAmount, state);
 
-                                Map<String, Object> parkingValues = parking.toMap();
-                                Map<String, Object> childUpdates = new HashMap<>();
+                                    Map<String, Object> parkingValues = parking.toMap();
+                                    Map<String, Object> childUpdatesA = new HashMap<>();
 
-                                String key = mRef.child("booking").push().getKey();
+                                    Map<String, Object> requestValues = request.toMap();
+                                    Map<String, Object> childUpdatesB = new HashMap<>();
 
-                                childUpdates.put("/booking/" + key, parkingValues);
+                                    Map<String, Object> receiptValues = receipt.toMap();
+                                    Map<String, Object> childUpdatesC = new HashMap<>();
 
-                                mRef.updateChildren(childUpdates);
-                                mRef.child("Parking-lot").child(parking_lot).child("status").setValue(newstatus);
+                                    String keyA = mRef.child("booking").push().getKey();
+                                    childUpdatesA.put("/booking/" + keyA, parkingValues);
 
-                                Intent intent = new Intent(ParkingActivity.this, TimeFragment.class);
-                                startActivity(intent);
-                            }
-                            else if (status.equals("Red")){
-                                Log.e(TAG, "Parking Lot Booked!");
-                                Toast.makeText(ParkingActivity.this, "This Parking Lot already been booking", Toast.LENGTH_SHORT).show();
-                                return;
+                                    String keyB = mRef.child("request").push().getKey();
+                                    childUpdatesB.put("/request/" + keyB, requestValues);
+
+                                    String keyC = mRef.child("receipt").push().getKey();
+                                    childUpdatesC.put("/receipt/" + keyC, receiptValues);
+
+                                    mRef.updateChildren(childUpdatesA);
+                                    mRef.updateChildren(childUpdatesB);
+                                    mRef.updateChildren(childUpdatesC);
+                                    mRef.child("Parking-lot").child(lot_key).child("status").setValue(newstatus);
+
+                                    Intent intent = new Intent(ParkingActivity.this, TimeFragment.class);
+                                    startActivity(intent);
+                                } else if (status.equals("Red")) {
+                                    final AlertDialog.Builder builder = new AlertDialog.Builder(ParkingActivity.this);
+                                    builder.setTitle("Sorry Sir/Madam,");
+                                    builder.setMessage("Parking Lot No: " + parking_lot + " already been booked.\nPlease process with another parking lot number." );
+                                    AlertDialog alert1 = builder.create();
+                                    alert1.show();
+                                    return;
+                                }
                             }
                         }
                         @Override

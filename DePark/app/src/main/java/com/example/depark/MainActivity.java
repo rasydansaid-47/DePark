@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_qrcode, R.id.nav_time,
+                R.id.nav_home, R.id.nav_qrcode, R.id.nav_time, R.id.nav_receipt_list,
                 R.id.nav_profile, R.id.nav_feedback, R.id.nav_logout)
                 .setDrawerLayout(drawerLayout)
                 .build();
@@ -136,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_time:
                         startActivity(new Intent(MainActivity.this,TimeFragment.class));
+                        break;
+                    case R.id.nav_receipt_list:
+                        startActivity(new Intent(MainActivity.this,ReceiptListFragement.class));
                         break;
                     case R.id.nav_profile:
                         startActivity(new Intent(MainActivity.this,ProfileFragment.class));

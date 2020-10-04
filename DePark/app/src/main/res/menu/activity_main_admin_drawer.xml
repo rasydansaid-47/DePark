@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_user_list" />
         <item
+            android:id="@+id/nav_condition_list"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_condition_list" />
+        <item
             android:id="@+id/nav_booking_list"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_booking_list" />
