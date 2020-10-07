@@ -1,10 +1,12 @@
 package com.example.depark;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ public class AdminHomeFragment extends Fragment {
     private StorageReference storageReference;
     private FirebaseAuth firebaseAuth;
     private ImageView img;
+    private Button b1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class AdminHomeFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 
         img = root.findViewById(R.id.imageView2);
+        b1 = root.findViewById(R.id.btnCheck);
 
         storageReference = firebaseStorage.getReference();
         storageReference.child(firebaseAuth.getUid()).
@@ -59,6 +63,14 @@ public class AdminHomeFragment extends Fragment {
                         Picasso.get().load(uri).fit().centerCrop().into(img);
                     }
                 });
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AdminScanActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return root;
     }

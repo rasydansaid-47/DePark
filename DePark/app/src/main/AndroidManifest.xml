@@ -37,6 +37,7 @@
         <activity android:name=".ParkingActivity" />
         <activity android:name=".TimeFragment" />
         <activity android:name=".QrCodeFragment" />
+        <activity android:name=".AdminScanActivity" />
         <activity android:name=".ScanActivity" />
         <activity android:name=".FeedbackFragment" />
         <activity android:name=".ValetFragment" />
