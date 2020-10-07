@@ -39,11 +39,6 @@ public class ReceiptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_receipt);
 
         t1 = findViewById(R.id.tvAuthor);
-        t2 = findViewById(R.id.tvLot);
-        t3 = findViewById(R.id.tvStart);
-        t4 = findViewById(R.id.tvEnd);
-        t5 = findViewById(R.id.tvPayment);
-        t6 = findViewById(R.id.tvTotal);
         b1 = findViewById(R.id.btnOK);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -71,12 +66,8 @@ public class ReceiptActivity extends AppCompatActivity {
                                 String lot = dataSnapshot.child("lot").getValue().toString();
                                 String start = dataSnapshot.child("start").getValue().toString();
 
-                                t1.setText(author);
-                                t2.setText(lot);
-                                t3.setText(start);
-                                t4.setText(end);
-                                t5.setText(state);
-                                t6.setText(total);
+                                t1.setText("No.ref: " + ref + "\n" + "Name: " + author + "\n" + "Parking Lot: " + lot + "\n" +
+                                "Payment State: " + state + "\n" + "Total Price: RM" + total);
 
                                 databaseReference.child("receipt").child(lockey).child("end").setValue(end);
                                 databaseReference.child("receipt").child(lockey).child("total").setValue(total);
