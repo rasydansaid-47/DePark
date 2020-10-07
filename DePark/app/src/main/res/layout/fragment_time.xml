@@ -21,24 +21,22 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintVertical_bias="0.84" />
 
     <Chronometer
         android:id="@+id/chronometer"
-        android:layout_width="285dp"
-        android:layout_height="130dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="287dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="368dp"
         android:fontFamily="@font/digital"
         android:format12Hour="hh:mm:ss a"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="60dp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textview1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView16"
@@ -50,40 +48,39 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.919" />
 
     <TextView
         android:id="@+id/textview1"
-        android:layout_width="288dp"
-        android:layout_height="87dp"
-        android:layout_marginTop="536dp"
-        android:layout_marginBottom="19dp"
-        android:fontFamily="@font/regular"
+        android:layout_width="287dp"
+        android:layout_height="123dp"
+        android:layout_marginBottom="44dp"
+        android:fontFamily="@font/digital"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="60dp"
         app:layout_constraintBottom_toTopOf="@+id/btnPay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView15"
         android:layout_width="290dp"
         android:layout_height="79dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textClock"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075"
+        app:layout_constraintVertical_bias="0.523"
         app:srcCompat="@drawable/timefee" />
 
     <Button
         android:id="@+id/btnPay"
-        android:layout_width="315dp"
-        android:layout_height="49dp"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
         android:background="@drawable/button"
         android:fontFamily="@font/bold"
         android:text="Pay"
