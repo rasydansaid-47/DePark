@@ -34,29 +34,45 @@ public class UpdatePassword extends AppCompatActivity {
         b2 = findViewById(R.id.backBtn2);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final String a = getUsernameFromEmail(firebaseUser.getEmail());
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userPasswordNew = e1.getText().toString();
-                firebaseUser.updatePassword(userPasswordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(UpdatePassword.this, "Password Changed", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(UpdatePassword.this, ProfileFragment.class));
-                            finish();
-                        }else{
-                            Toast.makeText(UpdatePassword.this, "Password Update Failed", Toast.LENGTH_SHORT).show();
+                if(a == "admin"){
+                    String userPasswordNew = e1.getText().toString();
+                    firebaseUser.updatePassword(userPasswordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(UpdatePassword.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(UpdatePassword.this, AdminProfileFragment.class));
+                                finish();
+                            }else{
+                                Toast.makeText(UpdatePassword.this, "Password Update Failed", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    String userPasswordNew = e1.getText().toString();
+                    firebaseUser.updatePassword(userPasswordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(UpdatePassword.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(UpdatePassword.this, ProfileFragment.class));
+                                finish();
+                            }else{
+                                Toast.makeText(UpdatePassword.this, "Password Update Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String a = getUsernameFromEmail(firebaseUser.getEmail());
                 if(a == "admin"){
                     startActivity(new Intent(UpdatePassword.this, AdminProfileFragment.class));
                     finish();
