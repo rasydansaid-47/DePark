@@ -25,44 +25,45 @@
 
     <EditText
         android:id="@+id/etEmailUpdate"
-        android:fontFamily="@font/regular"
-        android:layout_width="229dp"
-        android:layout_height="42dp"
+        android:layout_width="310dp"
+        android:layout_height="50sp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNameUpdate"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.122" />
 
     <EditText
         android:id="@+id/etNameUpdate"
-        android:layout_width="227dp"
-        android:layout_height="49dp"
+        android:layout_width="310dp"
+        android:layout_height="50sp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/input_field"
         android:ems="10"
         android:fontFamily="@font/regular"
         android:hint="Username"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfileUpdate" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.735" />
 
     <Button
         android:id="@+id/btnSave"
-        android:layout_width="229dp"
-        android:layout_height="42dp"
+        android:layout_width="310dp"
+        android:layout_height="50sp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -74,10 +75,9 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmailUpdate"
-        app:layout_constraintVertical_bias="0.187" />
+        app:layout_constraintVertical_bias="0.952" />
 
     <ImageView
         android:id="@+id/imageView12"

@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_newhome_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReceiptListFragement"></activity>
+        <activity android:name=".ReceiptListFragment"></activity>
         <activity android:name=".ReceiptActivity" />
         <activity android:name=".PaymentListFragment" />
         <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />

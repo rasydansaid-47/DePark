@@ -8,6 +8,7 @@
 
     <ListView
         android:id="@+id/listview"
+        android:background="@color/main"
         android:layout_width="410dp"
         android:layout_height="509dp"
         app:layout_constraintBottom_toTopOf="@+id/etLot"
