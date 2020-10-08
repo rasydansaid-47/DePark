@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConditionListFragment"
+    tools:context=".ReceiptListFragment"
     android:background="@color/main">
 
     <ListView
@@ -30,7 +30,7 @@
         android:hint="Parking Lot"
         android:inputType="textPersonName"
         android:textColorHint="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/etdate"
+        app:layout_constraintBottom_toTopOf="@+id/etdvvvate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"

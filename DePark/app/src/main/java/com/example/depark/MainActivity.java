@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private DatabaseReference databaseReference;
 
+
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
     FirebaseStorage firebaseStorage;
@@ -58,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -138,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this,TimeFragment.class));
                         break;
                     case R.id.nav_receipt_list:
-                        startActivity(new Intent(MainActivity.this,ReceiptListFragement.class));
+                        startActivity(new Intent(MainActivity.this,ReceiptListFragment.class));
                         break;
                     case R.id.nav_profile:
                         startActivity(new Intent(MainActivity.this,ProfileFragment.class));
@@ -177,4 +182,7 @@ public class MainActivity extends AppCompatActivity {
         toMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(toMain);
     }
+
+
+
 }

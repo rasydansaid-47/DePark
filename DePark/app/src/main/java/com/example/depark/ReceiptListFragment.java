@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ReceiptListFragement extends AppCompatActivity {
+public class ReceiptListFragment extends AppCompatActivity {
 
     private static final String TAG = "ValetListFragment";
     private static final String REQUIRED = "Required";
@@ -83,7 +83,7 @@ public class ReceiptListFragement extends AppCompatActivity {
                         l1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(ReceiptListFragement.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(ReceiptListFragment.this);
                                 builder.setTitle("Booking Date " + start + " to " + end);
                                 builder.setMessage("No.ref: " + ref + "\n" + "Name: " + author + "\n" + "Parking Lot: " + lot + "\n" +
                                         "Payment State: " + state + "\n" + "Total Price: RM" + total);
@@ -91,8 +91,9 @@ public class ReceiptListFragement extends AppCompatActivity {
                                 alert1.show();
                             }
                         });
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), "No data yet", Toast.LENGTH_SHORT).show();
+                        return;
                     }
                 }
             }
@@ -132,6 +133,9 @@ public class ReceiptListFragement extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                arrayAdapter.notifyDataSetChanged();
+                l1.invalidateViews();
+                l1.refreshDrawableState();
 
             }
         });
