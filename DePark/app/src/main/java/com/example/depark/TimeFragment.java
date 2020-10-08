@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -46,6 +48,7 @@ public class TimeFragment extends AppCompatActivity {
     private DatabaseReference databaseReference, mRef;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
+    SharedPreferences sharedPreferences;
 
     private Chronometer meter;
     private long pauseOffset;
@@ -78,17 +81,20 @@ public class TimeFragment extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final long time = sharedPreferences.getLong("time", 0);
+
         c1 = findViewById(R.id.textClock);
         meter = findViewById(R.id.chronometer);
         t1 = findViewById(R.id.textview1);
         b1 = findViewById(R.id.btnPay);
-        hours = SystemClock.elapsedRealtime() - meter.getBase();
+        hours = SystemClock.elapsedRealtime() - (meter.getBase() + time);
 
         startChronometer();
         meter.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                long myElapsedMillis = SystemClock.elapsedRealtime() - meter.getBase();
+                long myElapsedMillis = SystemClock.elapsedRealtime() - (meter.getBase() + time);
                 double seconds = myElapsedMillis * 0.001;
                 if (seconds <= 11700) {
                     pay = 2.0;
@@ -239,15 +245,22 @@ public class TimeFragment extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
+    protected void onStop() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong("time",meter.getBase()).apply();
+        editor.commit();
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong("time",meter.getBase()).apply();
+        editor.commit();
         stopService(new Intent(this, PayPalService.class));
+        super.onDestroy();
     }
 
     private String getUsernameFromEmail(String email) {

@@ -55,7 +55,7 @@ public class ReceiptListFragement extends AppCompatActivity {
 
         l1 = findViewById(R.id.listview);
         e1 = findViewById(R.id.etLot);
-        e2 = findViewById(R.id.etStatus);
+        e2 = findViewById(R.id.etdate);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser =  firebaseAuth.getCurrentUser();
@@ -70,26 +70,30 @@ public class ReceiptListFragement extends AppCompatActivity {
             @Override
             public void onDataChange (@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    final String ref = dataSnapshot.child("ref").getValue().toString();
-                    final String author = dataSnapshot.child("author").getValue().toString();
-                    final String lot = dataSnapshot.child("lot").getValue().toString();
-                    final String start = dataSnapshot.child("start").getValue().toString();
-                    final String end = dataSnapshot.child("end").getValue().toString();
-                    final String state = dataSnapshot.child("paymentState").getValue().toString();
-                    final String total = dataSnapshot.child("total").getValue().toString();
-                    arrayAdapter.add("Parking Lot: " + lot + "Date: " + start);
-                    l1.setAdapter(arrayAdapter);
-                    l1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(ReceiptListFragement.this);
-                            builder.setTitle("Booking Date " + start + " to " + end);
-                            builder.setMessage("No.ref: " + ref + "\n" + "Name: " + author + "\n" + "Parking Lot: " + lot + "\n" +
-                                    "Payment State: " + state + "\n" + "Total Price: RM" + total);
-                            AlertDialog alert1 = builder.create();
-                            alert1.show();
-                        }
-                    });
+                    if(dataSnapshot != null) {
+                        final String ref = dataSnapshot.child("ref").getValue().toString();
+                        final String author = dataSnapshot.child("author").getValue().toString();
+                        final String lot = dataSnapshot.child("lot").getValue().toString();
+                        final String start = dataSnapshot.child("start").getValue().toString();
+                        final String end = dataSnapshot.child("end").getValue().toString();
+                        final String state = dataSnapshot.child("paymentState").getValue().toString();
+                        final String total = dataSnapshot.child("total").getValue().toString();
+                        arrayAdapter.add("Parking Lot: " + lot + "\n" + "Date: " + start);
+                        l1.setAdapter(arrayAdapter);
+                        l1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(ReceiptListFragement.this);
+                                builder.setTitle("Booking Date " + start + " to " + end);
+                                builder.setMessage("No.ref: " + ref + "\n" + "Name: " + author + "\n" + "Parking Lot: " + lot + "\n" +
+                                        "Payment State: " + state + "\n" + "Total Price: RM" + total);
+                                AlertDialog alert1 = builder.create();
+                                alert1.show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
