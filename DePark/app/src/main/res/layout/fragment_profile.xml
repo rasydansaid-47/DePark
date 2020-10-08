@@ -24,19 +24,19 @@
         android:layout_width="411dp"
         android:layout_height="543dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="192dp"
         android:layout_marginEnd="8dp"
         android:background="@color/main"
         android:gravity="center_horizontal"
         android:textAlignment="center"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/btnChange"
+        android:id="@+id/btnProfile"
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="0.906" />
 
     <Button
-        android:id="@+id/btnUpdate"
+        android:id="@+id/btnPassword"
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
@@ -62,7 +62,7 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnChange"
+        app:layout_constraintBottom_toTopOf="@+id/btnProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +107,7 @@
         android:text="TextView"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpdate"
+        app:layout_constraintBottom_toTopOf="@+id/btnPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/text_share"

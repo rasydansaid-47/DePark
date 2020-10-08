@@ -149,15 +149,13 @@ public class AdminUpdateProfile extends AppCompatActivity {
                 String name = e1.getText().toString();
                 String email = e2.getText().toString();
 
-                UserProfile userProfile = new UserProfile(name, email);
-                databaseReference.child(firebaseUser.getUid()).setValue(userProfile);
+                databaseReference.child("name").setValue(name);
 
                 firebaseUser.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(AdminUpdateProfile.this,"Email Update", Toast.LENGTH_SHORT).show();
-                            sendEmailVerification();
                             finish();
                         }else{
                             Toast.makeText(AdminUpdateProfile.this,"Email Update Failed", Toast.LENGTH_SHORT).show();
@@ -171,8 +169,6 @@ public class AdminUpdateProfile extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.setMessage("Profile Pic is uploading..");
-                progressDialog.show();
 
                 StorageReference imageReference = storageReference.child(firebaseAuth.getUid()).child("Images").child("Profile Pic");  //User id/Images/Profile Pic.jpg
                 UploadTask uploadTask = imageReference.putFile(imagePath);
@@ -180,16 +176,14 @@ public class AdminUpdateProfile extends AppCompatActivity {
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Upload failed!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(AdminUpdateProfile.this, ProfileFragment.class));
+                        startActivity(new Intent(AdminUpdateProfile.this, AdminProfileFragment.class));
                     }
                 }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Upload successful!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(AdminUpdateProfile.this, ProfileFragment.class));
+                        startActivity(new Intent(AdminUpdateProfile.this, AdminProfileFragment.class));
                     }
                 });
                 finish();

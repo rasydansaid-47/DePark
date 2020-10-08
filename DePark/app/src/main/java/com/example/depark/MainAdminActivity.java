@@ -136,7 +136,7 @@ public class MainAdminActivity extends AppCompatActivity {
                         startActivity(new Intent(MainAdminActivity.this,FeedbackListFragment.class));
                         break;
                     case R.id.nav_profile:
-                        startActivity(new Intent(MainAdminActivity.this,ProfileFragment.class));
+                        startActivity(new Intent(MainAdminActivity.this,AdminProfileFragment.class));
                         break;
                     case R.id.nav_logout:
                         logout();

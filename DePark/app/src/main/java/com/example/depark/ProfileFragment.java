@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,8 +49,8 @@ public class ProfileFragment extends Activity {
         img = findViewById(R.id.imgProfile);
         t1 = findViewById(R.id.tvName);
         t2 = findViewById(R.id.tvEmail);
-        b1 = findViewById(R.id.btnUpdate);
-        b2 = findViewById(R.id.btnChange);
+        b1 = findViewById(R.id.btnPassword);
+        b2 = findViewById(R.id.btnProfile);
 
         firebaseStorage = FirebaseStorage.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();

@@ -94,10 +94,10 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
         Intent i;
 
         switch (view.getId()) {
-            case R.id.eparking_card : i = new Intent (getActivity(), QrCodeFragment.class); startActivity(i); break;
-            case R.id.receipt_card : i = new Intent (getActivity(), ReceiptListFragment.class); startActivity(i); break;
-            case R.id.fee_card : i = new Intent (getActivity(), TimeFragment.class); startActivity(i); break;
-            case R.id.valet_card : i = new Intent (getActivity(), ValetFragment.class); startActivity(i); break;
+            case R.id.eparking_card : i = new Intent (getActivity(), BookingListFragment.class); startActivity(i); break;
+            case R.id.receipt_card : i = new Intent (getActivity(), PaymentListFragment.class); startActivity(i); break;
+            case R.id.fee_card : i = new Intent (getActivity(), CustomerListFragment.class); startActivity(i); break;
+            case R.id.valet_card : i = new Intent (getActivity(), ValetListFragment.class); startActivity(i); break;
             default:break;
         }
 

@@ -73,7 +73,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.818" />
 
-    <EditText
+    <Spinner
         android:id="@+id/etTypeCar"
         android:layout_width="310dp"
         android:layout_height="50sp"
@@ -82,7 +82,6 @@
         android:ems="10"
         android:fontFamily="@font/regular"
         android:gravity="center"
-        android:hint="Type of Car"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textColor="@color/black"

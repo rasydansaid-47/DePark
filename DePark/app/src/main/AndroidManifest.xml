@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_newhome_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReceiptListFragment"></activity>
+        <activity android:name=".ReceiptListFragment"/>
         <activity android:name=".ReceiptActivity" />
         <activity android:name=".PaymentListFragment" />
         <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />
@@ -41,12 +41,18 @@
         <activity android:name=".ScanActivity" />
         <activity android:name=".FeedbackFragment" />
         <activity android:name=".ValetFragment" />
-        <activity android:name=".MainAdminActivity" />
+        <activity
+            android:name=".MainAdminActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".UpdatePassword" />
         <activity android:name=".ProfileFragment" />
         <activity android:name=".UpdateProfileActivity" />
         <activity android:name=".PasswordActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

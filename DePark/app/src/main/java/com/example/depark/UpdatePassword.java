@@ -38,7 +38,6 @@ public class UpdatePassword extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String userPasswordNew = e1.getText().toString();
                 firebaseUser.updatePassword(userPasswordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -57,9 +56,23 @@ public class UpdatePassword extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UpdatePassword.this, ProfileFragment.class));
-                finish();
+                String a = getUsernameFromEmail(firebaseUser.getEmail());
+                if(a == "admin"){
+                    startActivity(new Intent(UpdatePassword.this, AdminProfileFragment.class));
+                    finish();
+                } else {
+                    startActivity(new Intent(UpdatePassword.this, ProfileFragment.class));
+                    finish();
+                }
             }
         });
+    }
+
+    private String getUsernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
     }
 }

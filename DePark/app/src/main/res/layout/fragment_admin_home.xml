@@ -34,7 +34,7 @@
             app:cardUseCompatPadding="true">
 
             <LinearLayout
-                android:layout_width="104dp"
+                android:layout_width="129dp"
                 android:layout_height="87dp"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
@@ -45,13 +45,13 @@
                     android:layout_width="66dp"
                     android:layout_height="43dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/qrcode" />
+                    android:src="@drawable/ic_booking" />
 
                 <TextView
                     android:layout_width="127dp"
                     android:layout_height="27dp"
                     android:fontFamily="@font/bold"
-                    android:text="ePARKING"
+                    android:text="BOOKING LIST"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -84,13 +84,13 @@
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/receiptresize" />
+                    app:srcCompat="@drawable/feeresize" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
-                    android:text="RECEIPT"
+                    android:text="PAYMENT LIST"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -99,7 +99,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/fee_card"
-            android:layout_width="wrap_content"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
             android:layout_row="2"
             android:layout_rowWeight="1"
@@ -121,24 +121,22 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/feeresize" />
+                    android:src="@drawable/ic_users" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
-                    android:text="FEE"
+                    android:text="CUSTOMER LIST"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        vvv
-
         <androidx.cardview.widget.CardView
             android:id="@+id/valet_card"
-            android:layout_width="wrap_content"
+            android:layout_width="95dp"
             android:layout_height="128dp"
             android:layout_row="2"
             android:layout_rowWeight="1"
@@ -166,13 +164,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
-                    android:text="VALET"
+                    android:text=" VALET LIST"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </GridLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="176dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/textView2"
@@ -189,19 +199,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="176dp"
-        android:layout_height="123dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:layout_constraintVertical_bias="0.398" />
 
     <Button
         android:id="@+id/btnCheck"

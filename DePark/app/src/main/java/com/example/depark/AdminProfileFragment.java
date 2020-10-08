@@ -2,13 +2,11 @@ package com.example.depark;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,8 +48,8 @@ public class AdminProfileFragment extends AppCompatActivity {
         img = findViewById(R.id.imgProfile);
         t1 = findViewById(R.id.tvName);
         t2 = findViewById(R.id.tvEmail);
-        b1 = findViewById(R.id.btnUpdate);
-        b2 = findViewById(R.id.btnChange);
+        b1 = findViewById(R.id.btnPassword);
+        b2 = findViewById(R.id.btnProfile);
 
         firebaseStorage = FirebaseStorage.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -88,7 +86,7 @@ public class AdminProfileFragment extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener()
         {
             public void onClick (View view){
-                startActivity(new Intent(AdminProfileFragment.this, UpdateProfileActivity.class));
+                startActivity(new Intent(AdminProfileFragment.this, UpdatePassword.class));
             }
         });
 
@@ -96,7 +94,7 @@ public class AdminProfileFragment extends AppCompatActivity {
         {
             @Override
             public void onClick(View view){
-                startActivity(new Intent(AdminProfileFragment.this, UpdatePassword.class));
+                startActivity(new Intent(AdminProfileFragment.this, AdminUpdateProfile.class));
             }
         });
     }

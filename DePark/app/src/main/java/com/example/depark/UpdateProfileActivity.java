@@ -156,7 +156,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(UpdateProfileActivity.this,"Email Update", Toast.LENGTH_SHORT).show();
-                            sendEmailVerification();
                             finish();
                         }else{
                             Toast.makeText(UpdateProfileActivity.this,"Email Update Failed", Toast.LENGTH_SHORT).show();
